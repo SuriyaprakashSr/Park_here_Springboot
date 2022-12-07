@@ -30,9 +30,8 @@ public class UserDao {
 		return repository.save(user);
 	}
 
-	public String deleteUSer(int id) {
-		repository.deleteById(id);
-		return "Deleted";
+	public void deleteUSer(User user) {
+		repository.delete(user);
 	}
 
 }
