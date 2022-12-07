@@ -12,7 +12,7 @@ import com.ty.park_here.repository.ParkingLocationRepository;
 public class ParkingLocationDao {
 
 	@Autowired
-	ParkingLocationRepository parkingLocationRepository;
+	private ParkingLocationRepository parkingLocationRepository;
 
 	public ParkingLocation saveParkingLocation(ParkingLocation parkingLocation) {
 		return parkingLocationRepository.save(parkingLocation);
@@ -26,8 +26,7 @@ public class ParkingLocationDao {
 		return parkingLocationRepository.findByLocationName(name);
 	}
 
-	public String deleteByLocationName(int id) {
-		parkingLocationRepository.deleteById(id);
-		return "deleted";
+	public void deleteByLocationName(ParkingLocation parkingLocation) {
+		parkingLocationRepository.delete(parkingLocation);
 	}
 }
