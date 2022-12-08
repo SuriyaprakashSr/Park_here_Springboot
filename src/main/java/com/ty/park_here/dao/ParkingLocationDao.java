@@ -23,12 +23,12 @@ public class ParkingLocationDao {
 	public ParkingLocation findByLocationName(String name) {
 		return parkingLocationRepository.findByLocationName(name);
 	}
-	
+
 	public ParkingLocation findById(int id) {
 		return parkingLocationRepository.findById(id).get();
 	}
 
-	public void deleteByLocationName(ParkingLocation parkingLocation) {
+	public void deleteByLocation(ParkingLocation parkingLocation) {
 		parkingLocationRepository.delete(parkingLocation);
 	}
 }
