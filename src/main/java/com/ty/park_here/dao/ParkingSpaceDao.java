@@ -14,7 +14,7 @@ public class ParkingSpaceDao {
 	@Autowired
 	private ParkingSpaceRepository parkingSpaceRepository;
 
-	public ParkingSpace SaveParkingSpace(ParkingSpace parkingSpace) {
+	public ParkingSpace saveParkingSpace(ParkingSpace parkingSpace) {
 		return parkingSpaceRepository.save(parkingSpace);
 	}
 
@@ -27,8 +27,8 @@ public class ParkingSpaceDao {
 
 	}
 
-	public Optional<ParkingSpace> findParkingSpaceById(int id) {
-		 return parkingSpaceRepository.findById(id);
+	public ParkingSpace findParkingSpaceById(int id) {
+		 return parkingSpaceRepository.findById(id).get();
 	
 	}                          
 
