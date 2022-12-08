@@ -28,16 +28,15 @@ public class ParkingLocationService {
 	}
 
 	public ResponseEntity<ResponseStructure<ParkingLocation>> updateParkingLocation(ParkingLocation parkingLocation,
-			String name) {
-		ParkingLocation parkingLocation2 = parkingLocationDao.updateParkingLocation(parkingLocation);
+			int id) {
+		ParkingLocation parkingLocation2 = parkingLocationDao.findById(id);
 		ResponseStructure<ParkingLocation> responseStructure = new ResponseStructure<>();
-		ResponseEntity<ResponseStructure<ParkingLocation>> entity;
 		if (parkingLocation2 != null) {
-			parkingLocation.setLocationName(name);
+			parkingLocation.setId(id);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Updated ParkingLocation name");
 			responseStructure.setData(parkingLocationDao.updateParkingLocation(parkingLocation));
-			return entity = new ResponseEntity<ResponseStructure<ParkingLocation>>(responseStructure, HttpStatus.OK);
+			return new ResponseEntity<ResponseStructure<ParkingLocation>>(responseStructure, HttpStatus.OK);
 		}
 		throw new UnableToUpdateException();
 	}
@@ -45,26 +44,25 @@ public class ParkingLocationService {
 	public ResponseEntity<ResponseStructure<ParkingLocation>> findByLocationName(String name) {
 		ParkingLocation parkingLocation2 = parkingLocationDao.findByLocationName(name);
 		ResponseStructure<ParkingLocation> responseStructure = new ResponseStructure<>();
-		ResponseEntity<ResponseStructure<ParkingLocation>> entity;
 		if (parkingLocation2 != null) {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("LocationName found");
 			responseStructure.setData(parkingLocationDao.findByLocationName(name));
-			return entity = new ResponseEntity<ResponseStructure<ParkingLocation>>(responseStructure, HttpStatus.OK);
+			return new ResponseEntity<ResponseStructure<ParkingLocation>>(responseStructure, HttpStatus.OK);
 		}
 		throw new NoSuchNameFoundException();
 	}
 
-	public ResponseEntity<ResponseStructure<ParkingLocation>> deleteByLocationName(String name) {
-		ParkingLocation optional = parkingLocationDao.findByLocationName(name);
+	public ResponseEntity<ResponseStructure<ParkingLocation>> deleteByLocationName(int id) {
+		ParkingLocation parkingLocation = parkingLocationDao.findById(id);
 		ResponseStructure<ParkingLocation> responseStructure = new ResponseStructure<>();
 		ResponseEntity<ResponseStructure<ParkingLocation>> responseEntity = new ResponseEntity<ResponseStructure<ParkingLocation>>(
 				responseStructure, HttpStatus.OK);
-		if (optional != null) {
-			parkingLocationDao.deleteByLocationName(optional);
+		if (parkingLocation != null) {
+			parkingLocationDao.deleteByLocationName(parkingLocation);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("No LocationName found");
-			responseStructure.setData(optional);
+			responseStructure.setData(parkingLocation);
 			return responseEntity;
 		}
 		throw new NoSuchNameFoundException();
