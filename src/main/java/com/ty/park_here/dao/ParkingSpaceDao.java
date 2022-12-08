@@ -27,12 +27,9 @@ public class ParkingSpaceDao {
 
 	}
 
-	public ParkingSpace findParkingSpaceById(int id) {
-		Optional<ParkingSpace> optional = parkingSpaceRepository.findById(id);
-		if (optional.isPresent()) {
-			return optional.get();
-		}
-		return null;
+	public Optional<ParkingSpace> findParkingSpaceById(int id) {
+		 return parkingSpaceRepository.findById(id);
+	
 	}                          
 
 	public void deleteParkingSpace(ParkingSpace parkingSpace) {
