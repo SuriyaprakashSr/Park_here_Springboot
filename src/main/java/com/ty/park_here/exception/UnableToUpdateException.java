@@ -2,7 +2,7 @@ package com.ty.park_here.exception;
 
 public class UnableToUpdateException extends RuntimeException {
 	
-	private String message ="no such update  found";
+	private String message ="Unable to update ";
 
 	public UnableToUpdateException(String message) {
 		
