@@ -11,7 +11,6 @@ import com.ty.park_here.repository.UserRepository;
 @Repository
 public class UserDao {
 
-
 	@Autowired
 	private UserRepository repository;
 
