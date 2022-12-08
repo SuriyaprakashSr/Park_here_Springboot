@@ -20,26 +20,26 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
 		responseStructure.setMessage("No such id found");
 		responseStructure.setData(exception.getMessage());
-		return new ResponseEntity<ResponseStructure<?>>(responseStructure,HttpStatus.NOT_FOUND);
-		
+		return new ResponseEntity<ResponseStructure<?>>(responseStructure, HttpStatus.NOT_FOUND);
+
 	}
-	
+
 	@ExceptionHandler(NoSuchNameFoundException.class)
-	public ResponseEntity<ResponseStructure<?>> noSuchNameFoundException(NoSuchNameFoundException exception){
+	public ResponseEntity<ResponseStructure<?>> noSuchNameFoundException(NoSuchNameFoundException exception) {
 		ResponseStructure<String> responseStructure = new ResponseStructure<>();
 		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
 		responseStructure.setMessage("No Such Name Found");
 		responseStructure.setData(exception.getMessage());
-		return new ResponseEntity<ResponseStructure<?>>(responseStructure,HttpStatus.NOT_FOUND);
+		return new ResponseEntity<ResponseStructure<?>>(responseStructure, HttpStatus.NOT_FOUND);
 	}
-	
+
 	@ExceptionHandler(UnableToUpdateException.class)
-	public ResponseEntity<ResponseStructure<?>> unableToUpdateException(UnableToUpdateException exception){
+	public ResponseEntity<ResponseStructure<?>> unableToUpdateException(UnableToUpdateException exception) {
 		ResponseStructure<String> responseStructure = new ResponseStructure<>();
 		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
 		responseStructure.setMessage("Unable to update ");
 		responseStructure.setData(exception.getMessage());
-		return new ResponseEntity<ResponseStructure<?>>(responseStructure,HttpStatus.NOT_FOUND); 
+		return new ResponseEntity<ResponseStructure<?>>(responseStructure, HttpStatus.NOT_FOUND);
 	}
 
 }
