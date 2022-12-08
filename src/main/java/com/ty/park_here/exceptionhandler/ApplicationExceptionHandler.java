@@ -8,6 +8,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import com.ty.park_here.util.ResponseStructure;
 import com.ty.park_here.exception.NoSuchIdFoundException;
+import com.ty.park_here.exception.NoSuchLocationFoundException;
 import com.ty.park_here.exception.NoSuchNameFoundException;
 import com.ty.park_here.exception.UnableToUpdateException;
 
@@ -40,6 +41,17 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		responseStructure.setMessage("Unable to update ");
 		responseStructure.setData(exception.getMessage());
 		return new ResponseEntity<ResponseStructure<?>>(responseStructure, HttpStatus.NOT_FOUND);
+
+	}
+
+	@ExceptionHandler(NoSuchLocationFoundException.class)
+	public ResponseEntity<ResponseStructure<?>> unableToFindLocationException(NoSuchLocationFoundException exception) {
+		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
+		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("Unable to find location ");
+		responseStructure.setData(exception.getMessage());
+		return new ResponseEntity<ResponseStructure<?>>(responseStructure, HttpStatus.NOT_FOUND);
+
 	}
 
 }

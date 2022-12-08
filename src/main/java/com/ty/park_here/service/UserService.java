@@ -41,7 +41,7 @@ public class UserService {
 			responseStructure.setData(userDao.updateUser(user));
 			return responseEntity;
 		}
-		throw new UnableToUpdateException();
+		throw new UnableToUpdateException("Unable to update User as no user found");
 
 	}
 
@@ -55,7 +55,7 @@ public class UserService {
 			responseStructure.setData(userDao.getUserById(id).get());
 			return responseEntity;
 		}
-		throw new NoSuchIdFoundException();
+		throw new NoSuchIdFoundException("No user found for given id");
 	}
 	
 	public ResponseEntity<ResponseStructure<User>> deleteUser(int id){
@@ -69,6 +69,6 @@ public class UserService {
 			responseStructure.setData(optional.get());
 			return responseEntity;
 		}
-		throw new NoSuchIdFoundException();
+		throw new NoSuchIdFoundException("No User found to delete for given id");
 	}
 }
