@@ -18,12 +18,8 @@ public class UserDao {
 		return repository.save(user);
 	}
 
-	public User getUserById(int id) {
-		Optional<User> optional = repository.findById(id);
-		if (optional.isPresent()) {
-			return optional.get();
-		}
-		return null;
+	public Optional<User> getUserById(int id) {
+		return repository.findById(id);
 	}
 
 	public User updateUser(User user, int id) {
