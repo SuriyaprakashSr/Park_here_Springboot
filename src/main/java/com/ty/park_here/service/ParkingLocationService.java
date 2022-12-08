@@ -1,13 +1,12 @@
 package com.ty.park_here.service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ty.park_here.dao.ParkingLocationDao;
+import com.ty.park_here.dao.ParkingSpaceDao;
 import com.ty.park_here.dto.ParkingLocation;
 import com.ty.park_here.exception.NoSuchNameFoundException;
 import com.ty.park_here.exception.UnableToUpdateException;
@@ -18,6 +17,8 @@ public class ParkingLocationService {
 
 	@Autowired
 	private ParkingLocationDao parkingLocationDao;
+	@Autowired
+	private ParkingSpaceDao parkingSpaceDao;
 
 	public ResponseEntity<ResponseStructure<ParkingLocation>> saveParkingLocation(ParkingLocation parkingLocation) {
 		ResponseStructure<ParkingLocation> responseStructure = new ResponseStructure<>();
@@ -25,6 +26,7 @@ public class ParkingLocationService {
 		responseStructure.setMessage("Saved ParkingLocation Name");
 		responseStructure.setData(parkingLocationDao.saveParkingLocation(parkingLocation));
 		return new ResponseEntity<ResponseStructure<ParkingLocation>>(responseStructure, HttpStatus.CREATED);
+
 	}
 
 	public ResponseEntity<ResponseStructure<ParkingLocation>> updateParkingLocation(ParkingLocation parkingLocation,
