@@ -1,7 +1,5 @@
 package com.ty.park_here.service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ty.park_here.dao.ParkingLocationDao;
 import com.ty.park_here.dto.ParkingLocation;
+import com.ty.park_here.exception.NoSuchIdFoundException;
 import com.ty.park_here.exception.NoSuchNameFoundException;
 import com.ty.park_here.exception.UnableToUpdateException;
 import com.ty.park_here.util.ResponseStructure;
@@ -41,6 +40,18 @@ public class ParkingLocationService {
 		throw new UnableToUpdateException();
 	}
 
+	public ResponseEntity<ResponseStructure<ParkingLocation>> findById(int id) {
+		ParkingLocation parkingLocation = parkingLocationDao.findById(id);
+		ResponseStructure<ParkingLocation> responseStructure = new ResponseStructure<>();
+		if (parkingLocation != null) {
+			responseStructure.setStatus(HttpStatus.OK.value());
+			responseStructure.setMessage("LocationName found by Id");
+			responseStructure.setData(parkingLocationDao.findById(id));
+			return new ResponseEntity<ResponseStructure<ParkingLocation>>(responseStructure, HttpStatus.OK);
+		}
+		throw new NoSuchIdFoundException();
+	}
+
 	public ResponseEntity<ResponseStructure<ParkingLocation>> findByLocationName(String name) {
 		ParkingLocation parkingLocation2 = parkingLocationDao.findByLocationName(name);
 		ResponseStructure<ParkingLocation> responseStructure = new ResponseStructure<>();
@@ -53,19 +64,19 @@ public class ParkingLocationService {
 		throw new NoSuchNameFoundException();
 	}
 
-	public ResponseEntity<ResponseStructure<ParkingLocation>> deleteByLocationName(int id) {
+	public ResponseEntity<ResponseStructure<ParkingLocation>> deleteByLocation(int id) {
 		ParkingLocation parkingLocation = parkingLocationDao.findById(id);
 		ResponseStructure<ParkingLocation> responseStructure = new ResponseStructure<>();
 		ResponseEntity<ResponseStructure<ParkingLocation>> responseEntity = new ResponseEntity<ResponseStructure<ParkingLocation>>(
 				responseStructure, HttpStatus.OK);
 		if (parkingLocation != null) {
-			parkingLocationDao.deleteByLocationName(parkingLocation);
+			parkingLocationDao.deleteByLocation(parkingLocation);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("No LocationName found");
 			responseStructure.setData(parkingLocation);
 			return responseEntity;
 		}
-		throw new NoSuchNameFoundException();
+		throw new NoSuchIdFoundException();
 	}
 
 }
