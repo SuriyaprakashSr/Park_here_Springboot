@@ -26,9 +26,10 @@ public class ParkingSpaceServices {
 	public ResponseEntity<ResponseStructure<ParkingSpace>> saveParkingSpace(ParkingSpace parkingSpace, int id) {
 		ParkingLocation location = parkingLocationDao.findById(id);
 		ResponseStructure<ParkingSpace> responseStructure = new ResponseStructure<>();
-		List<ParkingSpace> list = location.getParkingSpaces();
 		if (location != null) {
+			List<ParkingSpace> list = location.getParkingSpaces();
 			list.add(parkingSpace);
+			parkingSpace.setAvailableSpace(parkingSpace.getTotalSpace()-parkingSpace.getUtilizedSpace());
 			location.setParkingSpaces(list);
 			responseStructure.setStatus(HttpStatus.CREATED.value());
 			responseStructure.setMessage("parking Spaces Added Sucessfully");
@@ -45,6 +46,7 @@ public class ParkingSpaceServices {
 		ResponseStructure<ParkingSpace> responseStructure = new ResponseStructure<>();
 		if (parkingSpace1 != null) {
 			parkingSpace.setId(id);
+			parkingSpace.setAvailableSpace(parkingSpace.getTotalSpace()-parkingSpace.getUtilizedSpace());
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Parking spaces updated Sucessfully");
 			responseStructure.setData(parkingSpaceDao.updateParkingSpace(parkingSpace));
