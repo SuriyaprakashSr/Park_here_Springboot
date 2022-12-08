@@ -13,6 +13,7 @@ import com.ty.park_here.dao.ParkingSpaceDao;
 import com.ty.park_here.dto.ParkingLocation;
 import com.ty.park_here.dto.ParkingSpace;
 import com.ty.park_here.exception.NoSuchIdFoundException;
+import com.ty.park_here.exception.NoSuchLocationFoundException;
 import com.ty.park_here.exception.NoSuchNameFoundException;
 import com.ty.park_here.util.ResponseStructure;
 
@@ -37,7 +38,9 @@ public class ParkingSpaceServices {
 			parkingLocationDao.saveParkingLocation(location);
 			return new ResponseEntity<ResponseStructure<ParkingSpace>>(responseStructure, HttpStatus.CREATED);
 		}
-		return null;
+		else {
+			throw new NoSuchLocationFoundException("unable to save parking space because no such location found");
+		}
 
 	}
 
