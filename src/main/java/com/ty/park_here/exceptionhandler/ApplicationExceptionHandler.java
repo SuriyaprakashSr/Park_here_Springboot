@@ -41,6 +41,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		responseStructure.setMessage("Unable to update ");
 		responseStructure.setData(exception.getMessage());
 		return new ResponseEntity<ResponseStructure<?>>(responseStructure, HttpStatus.NOT_FOUND);
+
 	}
 
 	@ExceptionHandler(NoSuchLocationFoundException.class)
@@ -50,6 +51,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		responseStructure.setMessage("Unable to find location ");
 		responseStructure.setData(exception.getMessage());
 		return new ResponseEntity<ResponseStructure<?>>(responseStructure, HttpStatus.NOT_FOUND);
+
 	}
 
 }
