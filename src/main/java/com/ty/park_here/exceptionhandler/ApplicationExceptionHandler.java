@@ -15,7 +15,7 @@ import com.ty.park_here.exception.UnableToUpdateException;
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(NoSuchIdFoundException.class)
-	public ResponseEntity<ResponseStructure<?>> NoSuchIdFoundException(NoSuchIdFoundException exception) {
+	public ResponseEntity<ResponseStructure<?>> noSuchIdFoundException(NoSuchIdFoundException exception) {
 		ResponseStructure<String> responseStructure = new ResponseStructure<>();
 		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
 		responseStructure.setMessage("No such id found");
@@ -25,7 +25,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 	}
 	
 	@ExceptionHandler(NoSuchNameFoundException.class)
-	public ResponseEntity<ResponseStructure<?>> NoSuchNameFoundException(NoSuchNameFoundException exception){
+	public ResponseEntity<ResponseStructure<?>> noSuchNameFoundException(NoSuchNameFoundException exception){
 		ResponseStructure<String> responseStructure = new ResponseStructure<>();
 		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
 		responseStructure.setMessage("No Such Name Found");
@@ -34,7 +34,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 	}
 	
 	@ExceptionHandler(UnableToUpdateException.class)
-	public ResponseEntity<ResponseStructure<?>> UnableToUpdateException(UnableToUpdateException exception){
+	public ResponseEntity<ResponseStructure<?>> unableToUpdateException(UnableToUpdateException exception){
 		ResponseStructure<String> responseStructure = new ResponseStructure<>();
 		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
 		responseStructure.setMessage("Unable to update ");
