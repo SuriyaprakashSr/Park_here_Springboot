@@ -24,5 +24,5 @@ public class ParkingLocation {
 	private String locationName;
 	@OneToMany
 	private List<ParkingSpace> parkingSpaces;
-	
+
 }
