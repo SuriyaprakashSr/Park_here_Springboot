@@ -22,11 +22,11 @@ public class UserDao {
 		return repository.findById(id);
 	}
 
-	public User updateUser(User user, int id) {
+	public User updateUser(User user) {
 		return repository.save(user);
 	}
 
-	public void deleteUSer(User user) {
+	public void deleteUser(User user) {
 		repository.delete(user);
 	}
 
