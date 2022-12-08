@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jmx.export.UnableToRegisterMBeanException;
 import org.springframework.stereotype.Service;
 
 import com.ty.park_here.dao.UserDao;
@@ -36,6 +35,7 @@ public class UserService {
 		ResponseEntity<ResponseStructure<User>> responseEntity = new ResponseEntity<ResponseStructure<User>>(
 				responseStructure, HttpStatus.OK);
 		if (user2.isPresent()) {
+			user.setId(id);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("User Updated Successfully");
 			responseStructure.setData(userDao.updateUser(user));
