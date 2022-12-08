@@ -1,5 +1,16 @@
 package com.ty.park_here.util;
 
-public class ResponseStructure {
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
+public class ResponseStructure<T> {
+	
+	private int status;
+	private String message;
+	private T data;
+	
+	
+	
 }
