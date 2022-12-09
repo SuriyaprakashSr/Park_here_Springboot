@@ -30,15 +30,14 @@ public class ParkingSpaceServices {
 		if (location != null) {
 			List<ParkingSpace> list = location.getParkingSpaces();
 			list.add(parkingSpace);
-			parkingSpace.setAvailableSpace(parkingSpace.getTotalSpace()-parkingSpace.getUtilizedSpace());
+			parkingSpace.setAvailableSpace(parkingSpace.getTotalSpace() - parkingSpace.getUtilizedSpace());
 			location.setParkingSpaces(list);
 			responseStructure.setStatus(HttpStatus.CREATED.value());
 			responseStructure.setMessage("parking Spaces Added Sucessfully");
 			responseStructure.setData(parkingSpaceDao.saveParkingSpace(parkingSpace));
 			parkingLocationDao.saveParkingLocation(location);
 			return new ResponseEntity<ResponseStructure<ParkingSpace>>(responseStructure, HttpStatus.CREATED);
-		}
-		else {
+		} else {
 			throw new NoSuchLocationFoundException("unable to save parking space because no such location found");
 		}
 
@@ -49,7 +48,7 @@ public class ParkingSpaceServices {
 		ResponseStructure<ParkingSpace> responseStructure = new ResponseStructure<>();
 		if (parkingSpace1 != null) {
 			parkingSpace.setId(id);
-			parkingSpace.setAvailableSpace(parkingSpace.getTotalSpace()-parkingSpace.getUtilizedSpace());
+			parkingSpace.setAvailableSpace(parkingSpace.getTotalSpace() - parkingSpace.getUtilizedSpace());
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Parking spaces updated Sucessfully");
 			responseStructure.setData(parkingSpaceDao.updateParkingSpace(parkingSpace));
@@ -72,19 +71,18 @@ public class ParkingSpaceServices {
 
 	}
 
-	public ResponseEntity<ResponseStructure<ParkingSpace>> deleteParkingSpaceById(int id) {
+	public ResponseEntity<ResponseStructure<String>> deleteParkingSpaceById(int id) {
 		ParkingSpace parkingSpace = parkingSpaceDao.findParkingSpaceById(id);
-		ResponseStructure<ParkingSpace> responseStructure = new ResponseStructure<>();
+		ResponseStructure<String> responseStructure = new ResponseStructure<>();
 		if (parkingSpace != null) {
-			parkingSpaceDao.deleteParkingSpace(parkingSpace);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("ParkingSpace Deleted  Sucessfully");
-			responseStructure.setData(parkingSpace);
-			return new ResponseEntity<ResponseStructure<ParkingSpace>>(responseStructure, HttpStatus.OK);
+			responseStructure.setData(parkingSpaceDao.deleteParkingSpace(id));
+			return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.OK);
 
+		} else {
+			throw new NoSuchIdFoundException();
 		}
-		throw new NoSuchIdFoundException();
-
 	}
 
 }
