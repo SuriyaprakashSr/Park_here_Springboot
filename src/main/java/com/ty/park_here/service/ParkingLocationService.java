@@ -76,7 +76,7 @@ public class ParkingLocationService {
 		if (parkingLocation != null) {
 			parkingLocationDao.deleteByLocation(parkingLocation);
 			responseStructure.setStatus(HttpStatus.OK.value());
-			responseStructure.setMessage("No LocationName found");
+			responseStructure.setMessage("LocationName deleted");
 			responseStructure.setData(parkingLocation);
 			return responseEntity;
 		}
