@@ -32,8 +32,9 @@ public class ParkingSpaceDao {
 	
 	}                          
 
-	public void deleteParkingSpace(ParkingSpace parkingSpace) {
-		parkingSpaceRepository.delete(parkingSpace);
+	public String deleteParkingSpace(int id) {
+		parkingSpaceRepository.deleteById(id);
+		return "deleted";
 	}
 
 	
