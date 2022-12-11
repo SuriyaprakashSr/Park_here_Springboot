@@ -30,7 +30,7 @@ public class ParkingSpaceServices {
 		if (location != null) {
 			List<ParkingSpace> list = location.getParkingSpaces();
 			list.add(parkingSpace);
-			parkingSpace.setAvailableSpace(parkingSpace.getTotalSpace() - parkingSpace.getUtilizedSpace());
+			parkingSpace.setAvailableSpace((parkingSpace.getTotalSpace()) - (parkingSpace.getUtilizedSpace()));
 			location.setParkingSpaces(list);
 			responseStructure.setStatus(HttpStatus.CREATED.value());
 			responseStructure.setMessage("parking Spaces Added Sucessfully");
@@ -60,11 +60,11 @@ public class ParkingSpaceServices {
 
 	public ResponseEntity<ResponseStructure<ParkingSpace>> getParkingSpaceByName(String name) {
 		ParkingSpace parkingSpace = parkingSpaceDao.findParkingSpaceByName(name);
-		ResponseStructure<ParkingSpace> responseStructure = new ResponseStructure<>();
+		ResponseStructure<ParkingSpace> responseStructure = new ResponseStructure<ParkingSpace>();
 		if (parkingSpace != null) {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Parking spaces received sucessfully");
-			responseStructure.setData(parkingSpace);
+			responseStructure.setData(parkingSpaceDao.findParkingSpaceByName(name));
 			return new ResponseEntity<ResponseStructure<ParkingSpace>>(responseStructure, HttpStatus.OK);
 		}
 		throw new NoSuchNameFoundException();
@@ -83,6 +83,19 @@ public class ParkingSpaceServices {
 		} else {
 			throw new NoSuchIdFoundException();
 		}
+	}
+	
+	public ResponseEntity<ResponseStructure<ParkingSpace>> getParkingSpaceById(int id) {
+		ParkingSpace parkingSpace = parkingSpaceDao.findParkingSpaceById(id);
+		ResponseStructure<ParkingSpace> responseStructure = new ResponseStructure<>();
+		if (parkingSpace != null) {
+			responseStructure.setStatus(HttpStatus.OK.value());
+			responseStructure.setMessage("Parking spaces received sucessfully");
+			responseStructure.setData(parkingSpaceDao.findParkingSpaceById(id));
+			return new ResponseEntity<ResponseStructure<ParkingSpace>>(responseStructure, HttpStatus.OK);
+		}
+		throw new NoSuchNameFoundException();
+
 	}
 
 }

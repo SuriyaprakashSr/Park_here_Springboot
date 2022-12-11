@@ -10,7 +10,9 @@ import com.ty.park_here.util.ResponseStructure;
 import com.ty.park_here.exception.NoSuchIdFoundException;
 import com.ty.park_here.exception.NoSuchLocationFoundException;
 import com.ty.park_here.exception.NoSuchNameFoundException;
+import com.ty.park_here.exception.UnableToDeleteLocationException;
 import com.ty.park_here.exception.UnableToUpdateException;
+import com.ty.park_here.exception.UnableToUpdateLocation;
 
 @RestControllerAdvice
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
@@ -53,5 +55,21 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		return new ResponseEntity<ResponseStructure<?>>(responseStructure, HttpStatus.NOT_FOUND);
 
 	}
-
+	@ExceptionHandler(UnableToUpdateLocation.class)
+	public ResponseEntity<ResponseStructure<?>> unableToUpdateLocation(UnableToUpdateLocation exception) {
+		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
+		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("Unable to update location ");
+		responseStructure.setData(exception.getMessage());
+		return new ResponseEntity<ResponseStructure<?>>(responseStructure, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(UnableToDeleteLocationException.class)
+	public ResponseEntity<ResponseStructure<?>> unableToDeleteLocationException(UnableToDeleteLocationException exception) {
+		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
+		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("Unable to update location ");
+		responseStructure.setData(exception.getMessage());
+		return new ResponseEntity<ResponseStructure<?>>(responseStructure, HttpStatus.NOT_FOUND);
+	}
 }
