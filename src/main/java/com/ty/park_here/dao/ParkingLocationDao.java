@@ -1,5 +1,7 @@
 package com.ty.park_here.dao;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -25,7 +27,11 @@ public class ParkingLocationDao {
 	}
 
 	public ParkingLocation findById(int id) {
-		return parkingLocationRepository.findById(id).get();
+		Optional<ParkingLocation>optional = parkingLocationRepository.findById(id);
+		if(optional.isPresent()) {
+			return optional.get();
+		}
+		return null;
 	}
 
 	public void deleteByLocation(ParkingLocation parkingLocation) {

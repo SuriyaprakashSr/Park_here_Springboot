@@ -15,6 +15,7 @@ import com.ty.park_here.dto.ParkingSpace;
 import com.ty.park_here.exception.NoSuchIdFoundException;
 import com.ty.park_here.exception.NoSuchLocationFoundException;
 import com.ty.park_here.exception.NoSuchNameFoundException;
+import com.ty.park_here.exception.UnableToUpdateException;
 import com.ty.park_here.util.ResponseStructure;
 
 @Service
@@ -25,9 +26,9 @@ public class ParkingSpaceServices {
 	ParkingLocationDao parkingLocationDao;
 
 	public ResponseEntity<ResponseStructure<ParkingSpace>> saveParkingSpace(ParkingSpace parkingSpace, int id) {
-		ParkingLocation location = parkingLocationDao.findById(id);
+	ParkingLocation location = parkingLocationDao.findById(id);
 		ResponseStructure<ParkingSpace> responseStructure = new ResponseStructure<>();
-		if (location != null) {
+		if (location !=null) {
 			List<ParkingSpace> list = location.getParkingSpaces();
 			list.add(parkingSpace);
 			parkingSpace.setAvailableSpace((parkingSpace.getTotalSpace()) - (parkingSpace.getUtilizedSpace()));
@@ -44,7 +45,7 @@ public class ParkingSpaceServices {
 	}
 
 	public ResponseEntity<ResponseStructure<ParkingSpace>> updateParkingSpaces(ParkingSpace parkingSpace, int id) {
-		ParkingSpace parkingSpace1 = parkingSpaceDao.findParkingSpaceById(id);
+		 ParkingSpace parkingSpace1 = parkingSpaceDao.findParkingSpaceById(id);
 		ResponseStructure<ParkingSpace> responseStructure = new ResponseStructure<>();
 		if (parkingSpace1 != null) {
 			parkingSpace.setId(id);
@@ -54,10 +55,9 @@ public class ParkingSpaceServices {
 			responseStructure.setData(parkingSpaceDao.updateParkingSpace(parkingSpace));
 			return new ResponseEntity<ResponseStructure<ParkingSpace>>(responseStructure, HttpStatus.OK);
 		}
-		throw new NoSuchIdFoundException();
+		throw new UnableToUpdateException();
 
 	}
-
 
 	public ResponseEntity<ResponseStructure<ParkingSpace>> getParkingSpaceByid(int id) {
 		ParkingSpace parkingSpace = parkingSpaceDao.findParkingSpaceById(id);
@@ -85,7 +85,5 @@ public class ParkingSpaceServices {
 			throw new NoSuchIdFoundException();
 		}
 	}
-	
-	
 
 }

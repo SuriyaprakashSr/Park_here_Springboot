@@ -1,5 +1,7 @@
 package com.ty.park_here.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +38,7 @@ public class ParkingLocationService {
 			int id) {
 		ParkingLocation parkingLocation2 = parkingLocationDao.findById(id);
 		ResponseStructure<ParkingLocation> responseStructure = new ResponseStructure<ParkingLocation>();
-		if (parkingLocation2 != null) {
+		if (parkingLocation2 !=null) {
 			parkingLocation.setId(id);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Updated ParkingLocation name");
@@ -44,7 +46,7 @@ public class ParkingLocationService {
 			return new ResponseEntity<ResponseStructure<ParkingLocation>>(responseStructure, HttpStatus.OK);
 		}
 		throw new UnableToUpdateLocation("Unable to update Parking location as no such id foubd to update");
-		
+
 	}
 
 	public ResponseEntity<ResponseStructure<ParkingLocation>> findById(int id) {
