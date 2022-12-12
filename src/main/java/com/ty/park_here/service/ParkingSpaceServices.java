@@ -58,17 +58,18 @@ public class ParkingSpaceServices {
 
 	}
 
-	public ResponseEntity<ResponseStructure<ParkingSpace>> getParkingSpaceByName(String name) {
-		ParkingSpace parkingSpace = parkingSpaceDao.findParkingSpaceByName(name);
-		ResponseStructure<ParkingSpace> responseStructure = new ResponseStructure<ParkingSpace>();
+
+	public ResponseEntity<ResponseStructure<ParkingSpace>> getParkingSpaceByid(int id) {
+		ParkingSpace parkingSpace = parkingSpaceDao.findParkingSpaceById(id);
+		ResponseStructure<ParkingSpace> responseStructure = new ResponseStructure<>();
 		if (parkingSpace != null) {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Parking spaces received sucessfully");
-			responseStructure.setData(parkingSpaceDao.findParkingSpaceByName(name));
+			responseStructure.setData(parkingSpaceDao.findParkingSpaceById(id))
 			return new ResponseEntity<ResponseStructure<ParkingSpace>>(responseStructure, HttpStatus.OK);
+		} else {
+			throw new NoSuchIdFoundException("no such id found");
 		}
-		throw new NoSuchNameFoundException();
-
 	}
 
 	public ResponseEntity<ResponseStructure<String>> deleteParkingSpaceById(int id) {
@@ -85,17 +86,6 @@ public class ParkingSpaceServices {
 		}
 	}
 	
-	public ResponseEntity<ResponseStructure<ParkingSpace>> getParkingSpaceById(int id) {
-		ParkingSpace parkingSpace = parkingSpaceDao.findParkingSpaceById(id);
-		ResponseStructure<ParkingSpace> responseStructure = new ResponseStructure<>();
-		if (parkingSpace != null) {
-			responseStructure.setStatus(HttpStatus.OK.value());
-			responseStructure.setMessage("Parking spaces received sucessfully");
-			responseStructure.setData(parkingSpaceDao.findParkingSpaceById(id));
-			return new ResponseEntity<ResponseStructure<ParkingSpace>>(responseStructure, HttpStatus.OK);
-		}
-		throw new NoSuchNameFoundException();
-
-	}
+	
 
 }

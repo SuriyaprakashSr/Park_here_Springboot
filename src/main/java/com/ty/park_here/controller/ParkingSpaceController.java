@@ -51,14 +51,16 @@ public class ParkingSpaceController {
 	return	parkingSpaceServices.updateParkingSpaces(parkingSpace, id);
 	}
 	
-	@ApiOperation(value = "Get parking space", notes = "It is used to get parking space by name")
+
+@ApiOperation(value = "Get parking space", notes = "It is used to get parking space by name")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 500, message = "Internal server Error"),
 			@ApiResponse(code = 404, message = "Not found"), @ApiResponse(code = 200, message = "ok") })
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseStructure<ParkingSpace>> getParkingSpaceByName(@RequestParam String name) {
-		return  parkingSpaceServices.getParkingSpaceByName(name);
-	}
+	public ResponseEntity<ResponseStructure<ParkingSpace>> getParkingSpaceByName(@RequestParam int id) {
+		return  parkingSpaceServices.getParkingSpaceByid(id)
+	
+
 	
 	@ApiOperation(value = "Delete parking space", notes = "Use to delete parking space By given Id")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 201, message = "Created"),

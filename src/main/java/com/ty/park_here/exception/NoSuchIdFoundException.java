@@ -10,7 +10,6 @@ public class NoSuchIdFoundException extends RuntimeException {
 	}
 	
 	public NoSuchIdFoundException() {
-	
 	}
 
 	@Override
