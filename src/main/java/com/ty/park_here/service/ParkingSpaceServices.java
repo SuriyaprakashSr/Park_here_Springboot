@@ -65,7 +65,7 @@ public class ParkingSpaceServices {
 		if (parkingSpace != null) {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Parking spaces received sucessfully");
-			responseStructure.setData(parkingSpaceDao.findParkingSpaceById(id))
+			responseStructure.setData(parkingSpaceDao.findParkingSpaceById(id));
 			return new ResponseEntity<ResponseStructure<ParkingSpace>>(responseStructure, HttpStatus.OK);
 		} else {
 			throw new NoSuchIdFoundException("no such id found");

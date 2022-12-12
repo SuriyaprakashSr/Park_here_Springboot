@@ -25,60 +25,59 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("parkingspace")
 public class ParkingSpaceController {
 
-	
 	@Autowired
 	private ParkingSpaceServices parkingSpaceServices;
-	
+
 	@ApiOperation(value = "Save parking space", notes = "It is used to save parking space")
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
+	@ApiResponses(value = {
+			@ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 500, message = "Internal server Error"),
-			@ApiResponse(code = 404, message = "Not found"), @ApiResponse(code = 200, message = "ok") })
+			@ApiResponse(code = 404, message = "Not found"), 
+			@ApiResponse(code = 200, message = "ok") })
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE }, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseStructure<ParkingSpace>>  saveParkingSpace(@RequestBody ParkingSpace parkingSpace,@RequestParam int id)
-	{
-	return	parkingSpaceServices.saveParkingSpace(parkingSpace, id);
+	public ResponseEntity<ResponseStructure<ParkingSpace>> saveParkingSpace(@RequestBody ParkingSpace parkingSpace,
+			@RequestParam int id) {
+		return parkingSpaceServices.saveParkingSpace(parkingSpace, id);
 	}
-	
+
 	@ApiOperation(value = "update parking space", notes = "It is used to update parking space")
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
+	@ApiResponses(value = { 
+			@ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 500, message = "Internal server Error"),
-			@ApiResponse(code = 404, message = "Not found"), @ApiResponse(code = 200, message = "ok") })
+			@ApiResponse(code = 404, message = "Not found"), 
+			@ApiResponse(code = 200, message = "ok") })
 	@PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE })
-	public ResponseEntity<ResponseStructure<ParkingSpace>>  updateParkingSpace(@RequestBody ParkingSpace parkingSpace,@RequestParam int id)
-	{
-	return	parkingSpaceServices.updateParkingSpaces(parkingSpace, id);
+	public ResponseEntity<ResponseStructure<ParkingSpace>> updateParkingSpace(@RequestBody ParkingSpace parkingSpace,
+			@RequestParam int id) {
+		return parkingSpaceServices.updateParkingSpaces(parkingSpace, id);
 	}
-	
 
-@ApiOperation(value = "Get parking space", notes = "It is used to get parking space by name")
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
+	@ApiOperation(value = "Get parking space", notes = "It is used to get parking space by name")
+	@ApiResponses(value = { 
+			@ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 500, message = "Internal server Error"),
-			@ApiResponse(code = 404, message = "Not found"), @ApiResponse(code = 200, message = "ok") })
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseStructure<ParkingSpace>> getParkingSpaceByName(@RequestParam int id) {
-		return  parkingSpaceServices.getParkingSpaceByid(id)
-	
-
-	
-	@ApiOperation(value = "Delete parking space", notes = "Use to delete parking space By given Id")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 404, message = "Not found"),
-			@ApiResponse(code = 500, message = "Internal server error") })
-	@DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseStructure<String>> deleteParkingSpaceById(@RequestParam int id) {
-		return parkingSpaceServices.deleteParkingSpaceById(id);
-		
+			@ApiResponse(code = 200, message = "ok") })
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseStructure<ParkingSpace>> getParkingSpaceByid(@RequestParam int id) {
+		return  parkingSpaceServices.getParkingSpaceByid(id);
+
 	}
+
+		@ApiOperation(value = "Delete parking space", notes = "Use to delete parking space By given Id")
+		@ApiResponses(value = { 
+				@ApiResponse(code = 200, message = "OK"), 
+				@ApiResponse(code = 201, message = "Created"),
+				@ApiResponse(code = 404, message = "Not found"),
+				@ApiResponse(code = 500, message = "Internal server error")})
+		@DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<ResponseStructure<String>> deleteParkingSpaceById(@RequestParam int id) {
+			return parkingSpaceServices.deleteParkingSpaceById(id);
+
+		}
+
 	
-	@ApiOperation(value = "Get parking space", notes = "It is used to get parking space by given id")
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
-			@ApiResponse(code = 500, message = "Internal server Error"),
-			@ApiResponse(code = 404, message = "Not found"), @ApiResponse(code = 200, message = "ok") })
-	@PatchMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseStructure<ParkingSpace>> getParkingSpaceById(@RequestParam int id) {
-		return  parkingSpaceServices.getParkingSpaceById(id);
-	}
-	
+
 }
