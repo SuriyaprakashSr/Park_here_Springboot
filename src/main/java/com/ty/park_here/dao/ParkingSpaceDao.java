@@ -22,10 +22,6 @@ public class ParkingSpaceDao {
 		return parkingSpaceRepository.save(parkingSpace);
 	}
 
-	public ParkingSpace findParkingSpaceByName(String name) {
-		return parkingSpaceRepository.findByParkingSpaceName(name);
-
-	}
 
 	public ParkingSpace findParkingSpaceById(int id) {
 		 return parkingSpaceRepository.findById(id).get();

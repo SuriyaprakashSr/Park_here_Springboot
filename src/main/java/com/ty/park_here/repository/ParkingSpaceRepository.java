@@ -6,7 +6,4 @@ import com.ty.park_here.dto.ParkingSpace;
 
 public interface ParkingSpaceRepository extends JpaRepository<ParkingSpace, Integer> {
 	
-	
-	ParkingSpace findByParkingSpaceName(String name);
-
 }

@@ -36,8 +36,8 @@ public class ParkingSpaceController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<ResponseStructure<ParkingSpace>> getParkingSpaceByName(@RequestParam String name) {
-		return  parkingSpaceServices.getParkingSpaceByName(name);
+	public ResponseEntity<ResponseStructure<ParkingSpace>> getParkingSpaceByName(@RequestParam int id) {
+		return  parkingSpaceServices.getParkingSpaceByid(id);
 	}
 	
 	@DeleteMapping
