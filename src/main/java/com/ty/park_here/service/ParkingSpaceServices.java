@@ -41,7 +41,6 @@ public class ParkingSpaceServices {
 		} else {
 			throw new NoSuchLocationFoundException("unable to save parking space because no such location found");
 		}
-
 	}
 
 	public ResponseEntity<ResponseStructure<ParkingSpace>> updateParkingSpaces(ParkingSpace parkingSpace, int id) {
@@ -56,7 +55,6 @@ public class ParkingSpaceServices {
 			return new ResponseEntity<ResponseStructure<ParkingSpace>>(responseStructure, HttpStatus.OK);
 		}
 		throw new UnableToUpdateException();
-
 	}
 
 	public ResponseEntity<ResponseStructure<ParkingSpace>> getParkingSpaceByid(int id) {
