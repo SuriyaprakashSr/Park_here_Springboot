@@ -30,7 +30,7 @@ public class ParkingSpaceServices {
 		if (location != null) {
 			List<ParkingSpace> list = location.getParkingSpaces();
 			list.add(parkingSpace);
-			parkingSpace.setAvailableSpace(parkingSpace.getTotalSpace() - parkingSpace.getUtilizedSpace());
+			parkingSpace.setAvailableSpace((parkingSpace.getTotalSpace()) - (parkingSpace.getUtilizedSpace()));
 			location.setParkingSpaces(list);
 			responseStructure.setStatus(HttpStatus.CREATED.value());
 			responseStructure.setMessage("parking Spaces Added Sucessfully");
@@ -58,13 +58,14 @@ public class ParkingSpaceServices {
 
 	}
 
+
 	public ResponseEntity<ResponseStructure<ParkingSpace>> getParkingSpaceByid(int id) {
 		ParkingSpace parkingSpace = parkingSpaceDao.findParkingSpaceById(id);
 		ResponseStructure<ParkingSpace> responseStructure = new ResponseStructure<>();
 		if (parkingSpace != null) {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Parking spaces received sucessfully");
-			responseStructure.setData(parkingSpaceDao.findParkingSpaceById(id));
+			responseStructure.setData(parkingSpaceDao.findParkingSpaceById(id))
 			return new ResponseEntity<ResponseStructure<ParkingSpace>>(responseStructure, HttpStatus.OK);
 		} else {
 			throw new NoSuchIdFoundException("no such id found");
@@ -84,5 +85,7 @@ public class ParkingSpaceServices {
 			throw new NoSuchIdFoundException();
 		}
 	}
+	
+	
 
 }
