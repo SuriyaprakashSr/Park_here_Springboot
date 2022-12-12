@@ -1,3 +1,4 @@
+	
 package com.ty.park_here.dao;
 
 import java.util.Optional;
@@ -10,22 +11,25 @@ import com.ty.park_here.repository.ParkingSpaceRepository;
 
 @Repository
 public class ParkingSpaceDao {
-
+	
 	@Autowired
 	private ParkingSpaceRepository parkingSpaceRepository;
-
+	
 	public ParkingSpace saveParkingSpace(ParkingSpace parkingSpace) {
 		return parkingSpaceRepository.save(parkingSpace);
 	}
-
+	
 	public ParkingSpace updateParkingSpace(ParkingSpace parkingSpace) {
 		return parkingSpaceRepository.save(parkingSpace);
 	}
-
-
-	public ParkingSpace findParkingSpaceById(int id) {
-		 return parkingSpaceRepository.findById(id).get();
 	
+	
+	public ParkingSpace findParkingSpaceById(int id) {
+		Optional< ParkingSpace> optional= parkingSpaceRepository.findById(id);
+		if(optional.isPresent()) {
+			return optional.get();
+		}
+		return null;
 	}                          
 
 	public String deleteParkingSpace(int id) {
