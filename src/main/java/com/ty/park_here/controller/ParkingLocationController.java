@@ -71,7 +71,6 @@ public class ParkingLocationController {
 	@ApiOperation(value = "Find ParkingLocation", notes = "It is used to find ParkingLocation by id")
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error"),
 			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 200,message = "ok") })
-
 	@PatchMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<ParkingLocation>> findById(@RequestParam int id) {
 		return parkingLocationService.findById(id);
