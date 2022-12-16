@@ -1,10 +1,13 @@
 package com.ty.park_here.dto;
 
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+
+import com.ty.park_here.util.AesEncryption;
 
 import lombok.Data;
 
@@ -20,6 +23,7 @@ public class User {
 	@NotNull
 	private String email;
 	@NotNull
+	@Convert(converter = AesEncryption.class)
 	private String password;
 	@NotNull
 	private long phone;

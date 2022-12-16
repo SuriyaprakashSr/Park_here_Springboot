@@ -74,6 +74,7 @@ public class ParkingSpaceServices {
 		ParkingSpace parkingSpace = parkingSpaceDao.findParkingSpaceById(id);
 		ResponseStructure<String> responseStructure = new ResponseStructure<>();
 		if (parkingSpace != null) {
+			//parkingLocationDao.findById(parkingSpace.)
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("ParkingSpace Deleted  Sucessfully");
 			responseStructure.setData(parkingSpaceDao.deleteParkingSpace(id));
