@@ -1,5 +1,6 @@
 package com.ty.park_here.service;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,8 +11,11 @@ import org.springframework.stereotype.Service;
 
 import com.ty.park_here.dao.ParkingLocationDao;
 import com.ty.park_here.dao.ParkingSpaceDao;
+import com.ty.park_here.dao.UserDao;
 import com.ty.park_here.dto.ParkingLocation;
 import com.ty.park_here.dto.ParkingSpace;
+import com.ty.park_here.dto.User;
+import com.ty.park_here.emailsender.SendEmail;
 import com.ty.park_here.exception.NoSuchIdFoundException;
 import com.ty.park_here.exception.NoSuchLocationFoundException;
 import com.ty.park_here.exception.NoSuchNameFoundException;
@@ -24,11 +28,15 @@ public class ParkingSpaceServices {
 	ParkingSpaceDao parkingSpaceDao;
 	@Autowired
 	ParkingLocationDao parkingLocationDao;
+	@Autowired
+	SendEmail sendEmail;
+	@Autowired
+	UserDao userDao;
 
 	public ResponseEntity<ResponseStructure<ParkingSpace>> saveParkingSpace(ParkingSpace parkingSpace, int id) {
-	ParkingLocation location = parkingLocationDao.findById(id);
+		ParkingLocation location = parkingLocationDao.findById(id);
 		ResponseStructure<ParkingSpace> responseStructure = new ResponseStructure<>();
-		if (location !=null) {
+		if (location != null) {
 			List<ParkingSpace> list = location.getParkingSpaces();
 			list.add(parkingSpace);
 			parkingSpace.setAvailableSpace((parkingSpace.getTotalSpace()) - (parkingSpace.getUtilizedSpace()));
@@ -43,10 +51,18 @@ public class ParkingSpaceServices {
 		}
 	}
 
-	public ResponseEntity<ResponseStructure<ParkingSpace>> updateParkingSpaces(ParkingSpace parkingSpace, int id) {
-		 ParkingSpace parkingSpace1 = parkingSpaceDao.findParkingSpaceById(id);
+	public ResponseEntity<ResponseStructure<ParkingSpace>> updateParkingSpaces(ParkingSpace parkingSpace, int id,
+			int uid, int pid) {
+		ParkingSpace parkingSpace1 = parkingSpaceDao.findParkingSpaceById(id);
+		ParkingLocation location = parkingLocationDao.findById(pid);
+		LocalTime time= LocalTime.now();
+		User user1 = userDao.getUserById(uid).get();
 		ResponseStructure<ParkingSpace> responseStructure = new ResponseStructure<>();
 		if (parkingSpace1 != null) {
+			String body = "Vehicle number: " + parkingSpace1.getVehicleNo()+"\nName:"+user1.getName() + "\nParking location: "
+					+ location.getLocationName() + "\nParking Space name: " + parkingSpace1.getParkingSpaceName()
+					+ "\nParking Rent per hour: " + parkingSpace1.getRentPerHour()+"\nParking time is: "+time.getHour()+":"+time.getMinute()+":"+time.getSecond();
+			sendEmail.sendMail(user1.getEmail(), body, "Parking detail of your vehicle");
 			parkingSpace.setId(id);
 			parkingSpace.setAvailableSpace(parkingSpace.getTotalSpace() - parkingSpace.getUtilizedSpace());
 			responseStructure.setStatus(HttpStatus.OK.value());
@@ -74,7 +90,7 @@ public class ParkingSpaceServices {
 		ParkingSpace parkingSpace = parkingSpaceDao.findParkingSpaceById(id);
 		ResponseStructure<String> responseStructure = new ResponseStructure<>();
 		if (parkingSpace != null) {
-			//parkingLocationDao.findById(parkingSpace.)
+			// parkingLocationDao.findById(parkingSpace.)
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("ParkingSpace Deleted  Sucessfully");
 			responseStructure.setData(parkingSpaceDao.deleteParkingSpace(id));

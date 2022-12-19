@@ -50,8 +50,8 @@ public class ParkingSpaceController {
 	@PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public ResponseEntity<ResponseStructure<ParkingSpace>> updateParkingSpace(@RequestBody ParkingSpace parkingSpace,
-			@RequestParam int id) {
-		return parkingSpaceServices.updateParkingSpaces(parkingSpace, id);
+			@RequestParam int id, @RequestParam int uid,@RequestParam int pid) {
+		return parkingSpaceServices.updateParkingSpaces(parkingSpace, id, uid, pid);
 	}
 
 	@ApiOperation(value = "Get parking space", notes = "It is used to get parking space by name")
