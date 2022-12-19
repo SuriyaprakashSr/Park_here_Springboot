@@ -29,5 +29,7 @@ public class ParkingSpace {
 	@NotNull
 	private int rentPerHour;
 	
+	private String vehicleNo;
+	
 	
 }
