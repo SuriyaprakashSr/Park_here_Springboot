@@ -9,10 +9,12 @@ import javax.validation.constraints.NotNull;
 
 import com.ty.park_here.util.AesEncryption;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @Entity
+@AllArgsConstructor
 public class User {
 
 	@Id
