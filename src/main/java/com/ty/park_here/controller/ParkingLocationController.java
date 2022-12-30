@@ -30,7 +30,7 @@ public class ParkingLocationController {
 
 	@ApiOperation(value = "Save ParkingLocation", notes = "It is used to save ParkingLocation")
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error"),
-			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 200,message = "ok") })
+			@ApiResponse(code = 404, message = "Not Found"), @ApiResponse(code = 200, message = "ok") })
 
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
@@ -41,7 +41,7 @@ public class ParkingLocationController {
 
 	@ApiOperation(value = "Update ParkingLocation", notes = "It is used to update ParkingLocation")
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error"),
-			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 200,message = "ok") })
+			@ApiResponse(code = 404, message = "Not Found"), @ApiResponse(code = 200, message = "ok") })
 
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
@@ -52,7 +52,7 @@ public class ParkingLocationController {
 
 	@ApiOperation(value = "Find ParkingLocation", notes = "It is used to find ParkingLocation by name")
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error"),
-			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 200,message = "ok") })
+			@ApiResponse(code = 404, message = "Not Found"), @ApiResponse(code = 200, message = "ok") })
 
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<ParkingLocation>> findByName(@RequestParam String locationName) {
@@ -61,7 +61,7 @@ public class ParkingLocationController {
 
 	@ApiOperation(value = "Delete ParkingLocation", notes = "It is used to delete ParkingLocation")
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error"),
-			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 200,message = "ok") })
+			@ApiResponse(code = 404, message = "Not Found"), @ApiResponse(code = 200, message = "ok") })
 
 	@DeleteMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<ParkingLocation>> deleteParkingLocation(@RequestParam int id) {
@@ -70,7 +70,7 @@ public class ParkingLocationController {
 
 	@ApiOperation(value = "Find ParkingLocation", notes = "It is used to find ParkingLocation by id")
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error"),
-			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 200,message = "ok") })
+			@ApiResponse(code = 404, message = "Not Found"), @ApiResponse(code = 200, message = "ok") })
 
 	@PatchMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<ParkingLocation>> findById(@RequestParam int id) {
