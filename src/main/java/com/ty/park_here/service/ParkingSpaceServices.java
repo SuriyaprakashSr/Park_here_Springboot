@@ -4,6 +4,7 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,8 @@ public class ParkingSpaceServices {
 	SendEmail sendEmail;
 	@Autowired
 	UserDao userDao;
+	
+	public static final Logger logger = Logger.getLogger(ParkingSpaceServices.class);
 
 	public ResponseEntity<ResponseStructure<ParkingSpace>> saveParkingSpace(ParkingSpace parkingSpace, int id) {
 		ParkingLocation location = parkingLocationDao.findById(id);
@@ -45,8 +48,10 @@ public class ParkingSpaceServices {
 			responseStructure.setMessage("parking Spaces Added Sucessfully");
 			responseStructure.setData(parkingSpaceDao.saveParkingSpace(parkingSpace));
 			parkingLocationDao.saveParkingLocation(location);
+			logger.debug("Parking Space Saved");
 			return new ResponseEntity<ResponseStructure<ParkingSpace>>(responseStructure, HttpStatus.CREATED);
 		} else {
+			logger.error("Unable to save parking space");
 			throw new NoSuchLocationFoundException("unable to save parking space because no such location found");
 		}
 	}
@@ -68,9 +73,12 @@ public class ParkingSpaceServices {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Parking spaces updated Sucessfully");
 			responseStructure.setData(parkingSpaceDao.updateParkingSpace(parkingSpace));
+			logger.debug("Parking Space Updated");
 			return new ResponseEntity<ResponseStructure<ParkingSpace>>(responseStructure, HttpStatus.OK);
-		}
+		}else {
+			logger.error("Unable to update parking space");
 		throw new UnableToUpdateException();
+		}
 	}
 
 	public ResponseEntity<ResponseStructure<ParkingSpace>> getParkingSpaceByid(int id) {
@@ -80,8 +88,10 @@ public class ParkingSpaceServices {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Parking spaces received sucessfully");
 			responseStructure.setData(parkingSpaceDao.findParkingSpaceById(id));
+			logger.debug("Parking Space found");
 			return new ResponseEntity<ResponseStructure<ParkingSpace>>(responseStructure, HttpStatus.OK);
 		} else {
+			logger.error("Unable to find parking space");
 			throw new NoSuchIdFoundException("no such id found");
 		}
 	}
@@ -94,9 +104,11 @@ public class ParkingSpaceServices {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("ParkingSpace Deleted  Sucessfully");
 			responseStructure.setData(parkingSpaceDao.deleteParkingSpace(id));
+			logger.warn("Parking Space found");
 			return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.OK);
 
 		} else {
+			logger.error("Unable to delete parking space");
 			throw new NoSuchIdFoundException();
 		}
 	}

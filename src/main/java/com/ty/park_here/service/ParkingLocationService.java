@@ -1,5 +1,6 @@
 package com.ty.park_here.service;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,11 +23,14 @@ public class ParkingLocationService {
 	@Autowired
 	private ParkingSpaceDao parkingSpaceDao;
 
+	public static final Logger logger = Logger.getLogger(ParkingSpaceServices.class);
+	
 	public ResponseEntity<ResponseStructure<ParkingLocation>> saveParkingLocation(ParkingLocation parkingLocation) {
 		ResponseStructure<ParkingLocation> responseStructure = new ResponseStructure<ParkingLocation>();
 		responseStructure.setStatus(HttpStatus.CREATED.value());
 		responseStructure.setMessage("Saved ParkingLocation Name");
 		responseStructure.setData(parkingLocationDao.saveParkingLocation(parkingLocation));
+		logger.debug("Parking location saved");
 		return new ResponseEntity<ResponseStructure<ParkingLocation>>(responseStructure, HttpStatus.CREATED);
 
 	}
@@ -40,9 +44,12 @@ public class ParkingLocationService {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Updated ParkingLocation name");
 			responseStructure.setData(parkingLocationDao.updateParkingLocation(parkingLocation));
+			logger.debug("Parking location updated");
 			return new ResponseEntity<ResponseStructure<ParkingLocation>>(responseStructure, HttpStatus.OK);
-		}
+		}else {
+			logger.error("Unable to update parking location");
 		throw new UnableToUpdateLocation("Unable to update Parking location as no such id foubd to update");
+		}
 
 	}
 
@@ -53,9 +60,12 @@ public class ParkingLocationService {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("LocationName found by Id");
 			responseStructure.setData(parkingLocationDao.findById(id));
+			logger.debug("Parking location found for givven id");
 			return new ResponseEntity<ResponseStructure<ParkingLocation>>(responseStructure, HttpStatus.OK);
-		}
+		}else {
+			logger.error("Unable to get parking location for given id");
 		throw new NoSuchIdFoundException("No such parking location found for given id");
+		}
 	}
 
 	public ResponseEntity<ResponseStructure<ParkingLocation>> findByLocationName(String name) {
@@ -65,9 +75,12 @@ public class ParkingLocationService {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("LocationName found");
 			responseStructure.setData(parkingLocationDao.findByLocationName(name));
+			logger.debug("Parking location found for givven name");
 			return new ResponseEntity<ResponseStructure<ParkingLocation>>(responseStructure, HttpStatus.OK);
-		}
+		}else {
+			logger.error("Unable to get parking location for given id");
 		throw new NoSuchNameFoundException("No parking location found for given name");
+		}
 	}
 
 	public ResponseEntity<ResponseStructure<ParkingLocation>> deleteByLocation(int id) {
@@ -80,9 +93,12 @@ public class ParkingLocationService {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("LocationName deleted");
 			responseStructure.setData(parkingLocation);
+			logger.warn("Parking location deleted");
 			return responseEntity;
-		}
+		}else {
+			logger.error("Unable to delete parking location for given id");
 		throw new UnableToDeleteLocationException("No parking location found to delete for given id");
+		}
 	}
 
 }
