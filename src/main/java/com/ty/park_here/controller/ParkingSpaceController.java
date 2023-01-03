@@ -1,5 +1,7 @@
 package com.ty.park_here.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +37,7 @@ public class ParkingSpaceController {
 			@ApiResponse(code = 403, message = "Forbidden"), @ApiResponse(code = 405, message = "Method Not Allowed") })
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE }, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseStructure<ParkingSpace>> saveParkingSpace(@RequestBody ParkingSpace parkingSpace,
+	public ResponseEntity<ResponseStructure<ParkingSpace>> saveParkingSpace(@Valid @RequestBody ParkingSpace parkingSpace,
 			@RequestParam int id) {
 		return parkingSpaceServices.saveParkingSpace(parkingSpace, id);
 	}
@@ -47,7 +49,7 @@ public class ParkingSpaceController {
 			@ApiResponse(code = 403, message = "Forbidden"), @ApiResponse(code = 405, message = "Method Not Allowed") })
 	@PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE })
-	public ResponseEntity<ResponseStructure<ParkingSpace>> updateParkingSpace(@RequestBody ParkingSpace parkingSpace,
+	public ResponseEntity<ResponseStructure<ParkingSpace>> updateParkingSpace(@Valid @RequestBody ParkingSpace parkingSpace,
 			@RequestParam int id, @RequestParam int uid, @RequestParam int pid) {
 		return parkingSpaceServices.updateParkingSpaces(parkingSpace, id, uid, pid);
 	}
@@ -58,7 +60,7 @@ public class ParkingSpaceController {
 			@ApiResponse(code = 404, message = "Not found"), @ApiResponse(code = 200, message = "ok"),
 			@ApiResponse(code = 403, message = "Forbidden"), @ApiResponse(code = 405, message = "Method Not Allowed") })
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseStructure<ParkingSpace>> getParkingSpaceByid(@RequestParam int id) {
+	public ResponseEntity<ResponseStructure<ParkingSpace>> getParkingSpaceByid(@Valid @RequestParam int id) {
 		return parkingSpaceServices.getParkingSpaceByid(id);
 
 	}
@@ -69,7 +71,7 @@ public class ParkingSpaceController {
 			@ApiResponse(code = 500, message = "Internal server error"),
 			@ApiResponse(code = 403, message = "Forbidden"), @ApiResponse(code = 405, message = "Method Not Allowed") })
 	@DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseStructure<String>> deleteParkingSpaceById(@RequestParam int id) {
+	public ResponseEntity<ResponseStructure<String>> deleteParkingSpaceById(@Valid @RequestParam int id) {
 		return parkingSpaceServices.deleteParkingSpaceById(id);
 
 	}

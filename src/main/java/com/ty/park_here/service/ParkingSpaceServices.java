@@ -2,7 +2,6 @@ package com.ty.park_here.service;
 
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Optional;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import com.ty.park_here.dto.User;
 import com.ty.park_here.emailsender.SendEmail;
 import com.ty.park_here.exception.NoSuchIdFoundException;
 import com.ty.park_here.exception.NoSuchLocationFoundException;
-import com.ty.park_here.exception.NoSuchNameFoundException;
 import com.ty.park_here.exception.UnableToUpdateException;
 import com.ty.park_here.util.ResponseStructure;
 
@@ -55,7 +53,6 @@ public class ParkingSpaceServices {
 			throw new NoSuchLocationFoundException("unable to save parking space because no such location found");
 		}
 	}
-
 	public ResponseEntity<ResponseStructure<ParkingSpace>> updateParkingSpaces(ParkingSpace parkingSpace, int id,
 			int uid, int pid) {
 		ParkingSpace parkingSpace1 = parkingSpaceDao.findParkingSpaceById(id);
@@ -99,8 +96,8 @@ public class ParkingSpaceServices {
 	public ResponseEntity<ResponseStructure<String>> deleteParkingSpaceById(int id) {
 		ParkingSpace parkingSpace = parkingSpaceDao.findParkingSpaceById(id);
 		ResponseStructure<String> responseStructure = new ResponseStructure<>();
+
 		if (parkingSpace != null) {
-			// parkingLocationDao.findById(parkingSpace.)
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("ParkingSpace Deleted  Sucessfully");
 			responseStructure.setData(parkingSpaceDao.deleteParkingSpace(id));

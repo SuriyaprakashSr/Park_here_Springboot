@@ -13,11 +13,17 @@ import javax.validation.constraints.Size;
 
 import com.ty.park_here.util.AesEncryption;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @Entity
+@AllArgsConstructor
 public class User {
+
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -22,7 +22,7 @@ public class ParkingLocation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@NotBlank
+	@NotBlank(message = "Location can no be blank")
 	private String locationName;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<ParkingSpace> parkingSpaces;
