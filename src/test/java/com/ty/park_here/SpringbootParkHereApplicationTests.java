@@ -21,34 +21,37 @@ import com.ty.park_here.repository.UserRepository;
 class SpringbootParkHereApplicationTests {
 
 	@MockBean
-	private  UserRepository repository;
-	
+	private UserRepository repository;
+
 	@Autowired
-	private  UserDao dao ;
-	
+	private UserDao dao;
+
 	Optional<User> optional;
-	
-	
+
 	@BeforeEach
 	public void optionalTest() {
-		optional=Optional.of(new User( 2,"suriya", "s@gmail.com", "1234", 123443, "blr", "User"));
+		User user = new User();
+		user.setId(1);
+		user.setName("Kumar Rishabh");
+		user.setEmail("rishabh.kumar0@gmail.com");
+		user.setPassword("rishabh");
+		user.setPhone(8102114064l);
+		user.setRole("Admin");
+		optional = Optional.of(user);
 	}
-	
+
 	@Test
 	public void saveUserTest() {
 		User user = optional.get();
 		when(repository.save(user)).thenReturn(user);
-		assertEquals(user, dao.saveUser(user));	
+		assertEquals(user, dao.saveUser(user));
 	}
-	
+
 	@Test
 	public void getUserByIdTest() {
 		Optional<User> user = Optional.of(optional.get());
 		when(repository.findById(1)).thenReturn(user);
-		assertEquals(user,dao.getUserById(1));
-	}	
-	 		
-	
-	
-       
+		assertEquals(user, dao.getUserById(1));
+	}
+
 }
