@@ -1,10 +1,15 @@
+
 package com.ty.park_here.exceptionhandler;
+
+import java.util.HashMap;
 
 import java.util.LinkedHashMap;
 import java.util.List;
+
 import java.util.Map;
 
 import javax.validation.ConstraintViolationException;
+
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -29,6 +34,7 @@ import com.ty.park_here.exception.UnableToUpdateLocation;
 
 @RestControllerAdvice
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
+	
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
@@ -106,15 +112,5 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		return new ResponseEntity<ResponseStructure<?>>(responseStructure, HttpStatus.NOT_FOUND);
 	}
 
-//	@ExceptionHandler(ConstraintViolationException.class)
-//	public ResponseEntity<ResponseStructure<?>> handleConstraintViolationException(ConstraintViolationException exception){
-//		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
-//		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
-//		responseStructure.setMessage("Enter proper fields ");
-//		responseStructure.setData(exception.getMessage());
-//		return new ResponseEntity<ResponseStructure<?>>(responseStructure, HttpStatus.NOT_FOUND);
-//	}
 
-	
-	
 }
