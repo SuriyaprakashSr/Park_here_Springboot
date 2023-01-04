@@ -14,60 +14,65 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ty.park_here.dto.User;
-import com.ty.park_here.service.UserService;
+import com.ty.park_here.dto.Admin;
+import com.ty.park_here.service.AdminService;
 import com.ty.park_here.util.ResponseStructure;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.var;
 
 @RestController
-@RequestMapping("user")
-public class UserController {
-
+@RequestMapping("admin")
+public class AdminController {
+	
 	@Autowired
-	private UserService userService;
-
-	@ApiOperation(value = "Save User", notes = "It is used to save user")
+	private AdminService adminService;
+	
+	//API TO SAVE ADMIN
+	@ApiOperation(value = "Save Admin", notes = "It is used to save Admin")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 500, message = "Internal server Error"),
 			@ApiResponse(code = 404, message = "Not found"), @ApiResponse(code = 200, message = "ok"),
 			@ApiResponse(code = 403, message = "Forbidden"), @ApiResponse(code = 405, message = "Method Not Allowed") })
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE }, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseStructure<User>> saveUser(@Valid @RequestBody User user) {
-		return userService.saveUser(user);
+	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(@Valid @RequestBody Admin admin){
+		return adminService.saveAdmin(admin);
 	}
-
-	@ApiOperation(value = "Get user", notes = "Get user by id")
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
-			@ApiResponse(code = 500, message = "Internal server error"),
-			@ApiResponse(code = 404, message = "Not found"), @ApiResponse(code = 200, message = "Ok"),
-			@ApiResponse(code = 403, message = "Forbidden"), @ApiResponse(code = 405, message = "Method Not Allowed") })
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseStructure<User>> getUserById(@Valid @RequestParam int id) {
-		return userService.getUserById(id);
-	}
-
-	@ApiOperation(value = "Update user", notes = "User to update user")
+	
+	//API TO UPDATE ADMIN
+	@ApiOperation(value = "Update Admin", notes = "Uses to update Admin")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 500, message = "Internal server error"),
 			@ApiResponse(code = 404, message = "Not found"), @ApiResponse(code = 403, message = "Forbidden"),
 			@ApiResponse(code = 405, message = "Method Not Allowed") })
 	@PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE })
-	public ResponseEntity<ResponseStructure<User>> updateUser(@Valid @RequestBody User user, @RequestParam int id) {
-		return userService.updateUser(user, id);
+	public ResponseEntity<ResponseStructure<Admin>> updateAdmin(@Valid @RequestBody Admin admin, @RequestParam int id) {
+		return adminService.updateAdmin(admin, id);
 	}
-
-	@ApiOperation(value = "Delete User", notes = "Use to delete User By given Id")
+	
+	//API TO GET ADMIN
+	@ApiOperation(value = "Get Admin", notes = "Get Admin by id")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
+			@ApiResponse(code = 500, message = "Internal server error"),
+			@ApiResponse(code = 404, message = "Not found"), @ApiResponse(code = 200, message = "Ok"),
+			@ApiResponse(code = 403, message = "Forbidden"), @ApiResponse(code = 405, message = "Method Not Allowed") })
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseStructure<Admin>> getAdminById(@Valid @RequestParam int id){
+		return adminService.getAdminById(id);
+	}
+	
+	//API TO DELETE ADMIN
+	@ApiOperation(value = "Delete Admin", notes = "Use to delete Admin By given Id")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 404, message = "Not found"),
 			@ApiResponse(code = 500, message = "Internal server error"),
 			@ApiResponse(code = 403, message = "Forbidden"), @ApiResponse(code = 403, message = "Method Not Allowed") })
 	@DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseStructure<User>> deleteUserById(@Valid @RequestParam int id) {
-		return userService.deleteUser(id);
+	public ResponseEntity<ResponseStructure<Admin>> deleteAdmin(@Valid @RequestParam int id) {
+		return adminService.deleteAdmin(id);
 	}
 }
