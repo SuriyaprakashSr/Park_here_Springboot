@@ -31,7 +31,7 @@ class SpringbootParkHereApplicationTests {
 	
 	@BeforeEach
 	public void optionalTest() {
-		optional=Optional.of(new User( 2,"suriya", "s@gmail.com", "1234", 123443, "blr", "User"));
+		optional=Optional.of(new User( 2,"suriya", "s@gmail.com", "1234", "123443", "blr", "User"));
 	}
 	
 	@Test

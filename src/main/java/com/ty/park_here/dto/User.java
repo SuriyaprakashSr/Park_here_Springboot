@@ -39,8 +39,8 @@ public class User {
 	@Size(min=4, max=10 ,message = "Password must be more than 4 and less them 10")
 	private String password;
 	
-	@NotNull(message = "Phone nuber can not be empty")
-	private long phone;
+	@NotBlank(message = "Phone number must be of 10 digits")
+	private String phone;
 	
 	@NotBlank(message = "address can not be blank")
 	private String address;
