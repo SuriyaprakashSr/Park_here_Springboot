@@ -26,7 +26,7 @@ public class AdminDao {
 		 adminRepository.delete(admin);
 	}
 	
-	public Optional<Admin> getAdmin(int id){
+	public Optional<Admin> getAdminById(int id){
 		return adminRepository.findById(id);
 	}
 }
