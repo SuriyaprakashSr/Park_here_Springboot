@@ -2,6 +2,7 @@ package com.ty.park_here.controller;
 
 import javax.validation.Valid;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,7 @@ public class ParkingLocationController {
 			@ApiResponse(code = 404, message = "Not Found"), @ApiResponse(code = 200, message = "ok") ,
 			@ApiResponse(code = 403, message = "Forbidden"), @ApiResponse(code = 405, message = "Method Not Allowed")})
 
+
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<ParkingLocation>> saveParkingLocation(@Valid
@@ -44,8 +46,10 @@ public class ParkingLocationController {
 
 	@ApiOperation(value = "Update ParkingLocation", notes = "It is used to update ParkingLocation")
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error"),
+
 			@ApiResponse(code = 404, message = "Not Found"), @ApiResponse(code = 200, message = "ok") ,
 			@ApiResponse(code = 403, message = "Forbidden"), @ApiResponse(code = 405, message = "Method Not Allowed")})
+
 
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
@@ -59,6 +63,7 @@ public class ParkingLocationController {
 			@ApiResponse(code = 404, message = "Not Found"), @ApiResponse(code = 200, message = "ok"),
 			@ApiResponse(code = 403, message = "Forbidden"), @ApiResponse(code = 405, message = "Method Not Allowed") })
 
+
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<ParkingLocation>> findByName(@Valid @RequestParam String locationName) {
 		return parkingLocationService.findByLocationName(locationName);
@@ -69,6 +74,7 @@ public class ParkingLocationController {
 			@ApiResponse(code = 404, message = "Not Found"), @ApiResponse(code = 200, message = "ok"),
 			@ApiResponse(code = 403, message = "Forbidden"), @ApiResponse(code = 405, message = "Method Not Allowed") })
 
+
 	@DeleteMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<ParkingLocation>> deleteParkingLocation(@Valid @RequestParam int id) {
 		return parkingLocationService.deleteByLocation(id);
@@ -78,6 +84,7 @@ public class ParkingLocationController {
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error"),
 			@ApiResponse(code = 404, message = "Not Found"), @ApiResponse(code = 200, message = "ok") ,
 			@ApiResponse(code = 403, message = "Forbidden"), @ApiResponse(code = 405, message = "Method Not Allowed")})
+
 
 	@PatchMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<ParkingLocation>> findById(@Valid @RequestParam int id) {
