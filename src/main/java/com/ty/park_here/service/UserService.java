@@ -49,7 +49,7 @@ public class UserService {
 			return responseEntity;
 		}else
 		{
-			logger.error("Unable to update user for the givven id");
+			logger.error("Unable to update user for the given id");
 		throw new UnableToUpdateException("Unable to update User as no user found");
 		}
 	}
@@ -66,7 +66,7 @@ public class UserService {
 			return responseEntity;
 		}else
 		{
-			logger.error("Unable to find the user for givven id");
+			logger.error("Unable to find the user for given id");
 		throw new NoSuchIdFoundException("No user found for given id");
 		}
 	}
