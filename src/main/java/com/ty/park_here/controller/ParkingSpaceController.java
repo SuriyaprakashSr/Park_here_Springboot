@@ -42,6 +42,18 @@ public class ParkingSpaceController {
 		return parkingSpaceServices.saveParkingSpace(parkingSpace, id);
 	}
 
+	@ApiOperation(value = "Send Token", notes = "It is used to Send Token")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
+			@ApiResponse(code = 500, message = "Internal server Error"),
+			@ApiResponse(code = 404, message = "Not found"), @ApiResponse(code = 200, message = "ok"),
+			@ApiResponse(code = 403, message = "Forbidden"), @ApiResponse(code = 405, message = "Method Not Allowed") })
+	@PatchMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_ATOM_XML_VALUE })
+	public ResponseEntity<ResponseStructure<ParkingSpace>> SendTocken(@Valid @RequestBody ParkingSpace parkingSpace,
+			@RequestParam int id, @RequestParam int uid, @RequestParam int pid) {
+		return parkingSpaceServices.SendToken(parkingSpace, id, uid, pid);
+	}
+	
 	@ApiOperation(value = "update parking space", notes = "It is used to update parking space")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 500, message = "Internal server Error"),
@@ -50,8 +62,8 @@ public class ParkingSpaceController {
 	@PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public ResponseEntity<ResponseStructure<ParkingSpace>> updateParkingSpace(@Valid @RequestBody ParkingSpace parkingSpace,
-			@RequestParam int id, @RequestParam int uid, @RequestParam int pid) {
-		return parkingSpaceServices.updateParkingSpaces(parkingSpace, id, uid, pid);
+			@RequestParam int id) {
+		return parkingSpaceServices.updateParkingSpace(parkingSpace, id);
 	}
 
 	@ApiOperation(value = "Get parking space", notes = "It is used to get parking space by name")
