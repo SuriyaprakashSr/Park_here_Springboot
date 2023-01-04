@@ -28,7 +28,6 @@ class UserControllerTest {
 		user.setAddress("Blr");
 		user.setPassword("ku123");
 		user.setPhone(88776645);
-		user.setRole("user");
 		userRepo.save(user);
 		assertNotNull(userRepo.findById(1).get());
 	}

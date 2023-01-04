@@ -42,6 +42,4 @@ public class User {
 	@NotBlank(message = "address can not be blank")
 	private String address;
 	
-	@NotBlank(message =  "Role can not be blank")
-	private String role;
 }
