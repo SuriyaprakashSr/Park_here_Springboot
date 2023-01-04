@@ -26,7 +26,7 @@ public class ManagerDao {
 		return managerRepository.findById(id);
 	}
 
-	public void deleteManager(Manager manager) {
-		managerRepository.delete(manager);
+	public void deleteManager(int id) {
+		managerRepository.deleteById(id);
 	}
 }

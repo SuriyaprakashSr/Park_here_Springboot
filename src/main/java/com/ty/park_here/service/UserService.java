@@ -49,6 +49,7 @@ public class UserService {
 		} else {
 			logger.error("Unable to update user for the givven id");
 			throw new UnableToUpdateException("Unable to update User as no user found");
+
 		}
 	}
 
@@ -63,9 +64,11 @@ public class UserService {
 			responseStructure.setData(userDao.getUserById(id).get());
 			logger.debug("User found");
 			return responseEntity;
+
 		} else {
 			logger.error("Unable to find the user for givven id");
 			throw new NoSuchIdFoundException("No user found for given id");
+
 		}
 	}
 
