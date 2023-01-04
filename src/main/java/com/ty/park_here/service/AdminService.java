@@ -78,6 +78,7 @@ public class AdminService {
 		ResponseEntity<ResponseStructure<Admin>> responseEntity = new ResponseEntity<ResponseStructure<Admin>>(
 				responseStructur, HttpStatus.OK);
 		if(admin2.isPresent()) {
+			adminDao.deleteAdmin(admin2.get());
 			responseStructur.setStatus(HttpStatus.OK.value());
 			responseStructur.setMessage("Admin deleted for provided Id");
 			responseStructur.setData(admin2.get());

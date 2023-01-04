@@ -34,5 +34,7 @@ public class Admin {
 	
 	@NotBlank(message = "Address can not be blank")
 	private String address;
+	
+	private String requestParkingLocation;
 
 }
