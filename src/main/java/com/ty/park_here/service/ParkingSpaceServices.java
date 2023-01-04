@@ -53,7 +53,7 @@ public class ParkingSpaceServices {
 			throw new NoSuchLocationFoundException("unable to save parking space because no such location found");
 		}
 	}
-	public ResponseEntity<ResponseStructure<ParkingSpace>> SendTocken(ParkingSpace parkingSpace, int id,
+	public ResponseEntity<ResponseStructure<ParkingSpace>> SendToken(ParkingSpace parkingSpace, int id,
 			int uid, int pid) {
 		ParkingSpace parkingSpace1 = parkingSpaceDao.findParkingSpaceById(id);
 		ParkingLocation location = parkingLocationDao.findById(pid);
@@ -68,12 +68,12 @@ public class ParkingSpaceServices {
 			parkingSpace.setId(id);
 			parkingSpace.setAvailableSpace(parkingSpace.getTotalSpace() - parkingSpace.getUtilizedSpace());
 			responseStructure.setStatus(HttpStatus.OK.value());
-			responseStructure.setMessage("Tocken sent sucessfully to " + user1.getEmail());
+			responseStructure.setMessage("Token sent sucessfully to " + user1.getEmail());
 			responseStructure.setData(parkingSpaceDao.updateParkingSpace(parkingSpace));
-			logger.debug("Parking Space Updated");
+			logger.debug("Token has been sent sucessfully");
 			return new ResponseEntity<ResponseStructure<ParkingSpace>>(responseStructure, HttpStatus.OK);
 		}else {
-			logger.error("Unable to update parking space");
+			logger.error("Unable to senď token");
 		throw new UnableToUpdateException();
 		}
 	}

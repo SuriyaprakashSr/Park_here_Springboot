@@ -42,7 +42,7 @@ public class ParkingSpaceController {
 		return parkingSpaceServices.saveParkingSpace(parkingSpace, id);
 	}
 
-	@ApiOperation(value = "update parking space", notes = "It is used to update parking space")
+	@ApiOperation(value = "Send Token", notes = "It is used to Send Token")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 500, message = "Internal server Error"),
 			@ApiResponse(code = 404, message = "Not found"), @ApiResponse(code = 200, message = "ok"),
@@ -51,7 +51,7 @@ public class ParkingSpaceController {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public ResponseEntity<ResponseStructure<ParkingSpace>> SendTocken(@Valid @RequestBody ParkingSpace parkingSpace,
 			@RequestParam int id, @RequestParam int uid, @RequestParam int pid) {
-		return parkingSpaceServices.SendTocken(parkingSpace, id, uid, pid);
+		return parkingSpaceServices.SendToken(parkingSpace, id, uid, pid);
 	}
 	
 	@ApiOperation(value = "update parking space", notes = "It is used to update parking space")
