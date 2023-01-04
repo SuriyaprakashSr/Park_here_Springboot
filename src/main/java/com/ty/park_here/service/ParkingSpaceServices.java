@@ -53,7 +53,7 @@ public class ParkingSpaceServices {
 			throw new NoSuchLocationFoundException("unable to save parking space because no such location found");
 		}
 	}
-	public ResponseEntity<ResponseStructure<ParkingSpace>> updateParkingSpaces(ParkingSpace parkingSpace, int id,
+	public ResponseEntity<ResponseStructure<ParkingSpace>> SendTocken(ParkingSpace parkingSpace, int id,
 			int uid, int pid) {
 		ParkingSpace parkingSpace1 = parkingSpaceDao.findParkingSpaceById(id);
 		ParkingLocation location = parkingLocationDao.findById(pid);
@@ -65,6 +65,24 @@ public class ParkingSpaceServices {
 					+ location.getLocationName() + "\nParking Space name: " + parkingSpace1.getParkingSpaceName()
 					+ "\nParking Rent per hour: " + parkingSpace1.getRentPerHour()+"\nParking time is: "+time.getHour()+":"+time.getMinute()+":"+time.getSecond();
 			sendEmail.sendMail(user1.getEmail(), body, "Parking detail of your vehicle");
+			parkingSpace.setId(id);
+			parkingSpace.setAvailableSpace(parkingSpace.getTotalSpace() - parkingSpace.getUtilizedSpace());
+			responseStructure.setStatus(HttpStatus.OK.value());
+			responseStructure.setMessage("Tocken sent sucessfully to " + user1.getEmail());
+			responseStructure.setData(parkingSpaceDao.updateParkingSpace(parkingSpace));
+			logger.debug("Parking Space Updated");
+			return new ResponseEntity<ResponseStructure<ParkingSpace>>(responseStructure, HttpStatus.OK);
+		}else {
+			logger.error("Unable to update parking space");
+		throw new UnableToUpdateException();
+		}
+	}
+	
+	
+	public ResponseEntity<ResponseStructure<ParkingSpace>> updateParkingSpace(ParkingSpace parkingSpace, int id) {
+		ParkingSpace parkingSpace1 = parkingSpaceDao.findParkingSpaceById(id);
+		ResponseStructure<ParkingSpace> responseStructure = new ResponseStructure<>();
+		if (parkingSpace1 != null) {
 			parkingSpace.setId(id);
 			parkingSpace.setAvailableSpace(parkingSpace.getTotalSpace() - parkingSpace.getUtilizedSpace());
 			responseStructure.setStatus(HttpStatus.OK.value());
