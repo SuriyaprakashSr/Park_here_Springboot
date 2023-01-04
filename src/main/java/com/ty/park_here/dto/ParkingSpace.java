@@ -18,7 +18,7 @@ public class ParkingSpace {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@NotNull
+	@NotNull(message = "Name can not be blank.. Kindly fill the valid name")
 	private String parkingSpaceName;
 	@NotNull
 	private int availableSpace;
