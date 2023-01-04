@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
@@ -18,15 +19,20 @@ public class ParkingSpace {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@NotNull
+
+	@NotNull(message = "Name can not be blank.. Kindly fill the valid name")
 	private String parkingSpaceName;
-	@NotNull
+	
+	@NotBlank(message = "Available space can not be null")
 	private int availableSpace;
-	@NotNull
+	
+	@NotBlank(message = "Utilized space can not be null")
 	private int utilizedSpace;
-	@NotNull
+	
+	@NotNull(message = "Totel space can not be null")
 	private int totalSpace;
-	@NotNull
+	
+	@NotNull(message = "Totel space can not be null")
 	private int rentPerHour;
 	
 	private String vehicleNo;
