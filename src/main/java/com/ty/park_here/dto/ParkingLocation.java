@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
@@ -21,7 +22,7 @@ public class ParkingLocation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@NotNull
+	@NotBlank(message = "Location can no be blank")
 	private String locationName;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<ParkingSpace> parkingSpaces;

@@ -31,7 +31,9 @@ public class UserService {
 		ResponseEntity<ResponseStructure<User>> responseEntity = new ResponseEntity<ResponseStructure<User>>(
 				responseStructure, HttpStatus.CREATED);
 		return responseEntity;
+		
 	}
+	
 
 	public ResponseEntity<ResponseStructure<User>> updateUser(User user, int id) {
 		Optional<User> user2 = userDao.getUserById(id);

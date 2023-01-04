@@ -1,6 +1,9 @@
 package com.ty.park_here.controller;
 
 import org.springframework.stereotype.Controller;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,38 +34,42 @@ public class UserController {
 	@ApiOperation(value = "Save User", notes = "It is used to save user")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 500, message = "Internal server Error"),
-			@ApiResponse(code = 404, message = "Not found"), @ApiResponse(code = 200, message = "ok") })
+			@ApiResponse(code = 404, message = "Not found"), @ApiResponse(code = 200, message = "ok"),
+			@ApiResponse(code = 403, message = "Forbidden"), @ApiResponse(code = 405, message = "Method Not Allowed") })
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE }, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseStructure<User>> saveUser(@RequestBody User user) {
+	public ResponseEntity<ResponseStructure<User>> saveUser(@Valid @RequestBody User user) {
 		return userService.saveUser(user);
 	}
 
 	@ApiOperation(value = "Get user", notes = "Get user by id")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 500, message = "Internal server error"),
-			@ApiResponse(code = 404, message = "Not found"), @ApiResponse(code = 200, message = "Ok") })
+			@ApiResponse(code = 404, message = "Not found"), @ApiResponse(code = 200, message = "Ok"),
+			@ApiResponse(code = 403, message = "Forbidden"), @ApiResponse(code = 405, message = "Method Not Allowed") })
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseStructure<User>> getUserById(@RequestParam int id) {
+	public ResponseEntity<ResponseStructure<User>> getUserById(@Valid @RequestParam int id) {
 		return userService.getUserById(id);
 	}
 
 	@ApiOperation(value = "Update user", notes = "User to update user")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 500, message = "Internal server error"),
-			@ApiResponse(code = 404, message = "Not found") })
+			@ApiResponse(code = 404, message = "Not found"), @ApiResponse(code = 403, message = "Forbidden"),
+			@ApiResponse(code = 405, message = "Method Not Allowed") })
 	@PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE })
-	public ResponseEntity<ResponseStructure<User>> updateUser(@RequestBody User user, @RequestParam int id) {
+	public ResponseEntity<ResponseStructure<User>> updateUser(@Valid @RequestBody User user, @RequestParam int id) {
 		return userService.updateUser(user, id);
 	}
 
 	@ApiOperation(value = "Delete User", notes = "Use to delete User By given Id")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 404, message = "Not found"),
-			@ApiResponse(code = 500, message = "Internal server error") })
+			@ApiResponse(code = 500, message = "Internal server error"),
+			@ApiResponse(code = 403, message = "Forbidden"), @ApiResponse(code = 403, message = "Method Not Allowed") })
 	@DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseStructure<User>> deleteUserById(@RequestParam int id) {
+	public ResponseEntity<ResponseStructure<User>> deleteUserById(@Valid @RequestParam int id) {
 		return userService.deleteUser(id);
 	}
 }
