@@ -1,6 +1,7 @@
 package com.ty.park_here.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
@@ -20,12 +21,12 @@ public class ApplicationConfig {
 
 	@Bean
 	public Docket getDocket() {
-		Contact contact = new Contact("ty", "testYantra.com", "tastyantra@gmail.com");
+		Contact contact = new Contact("TestYantra.in", "testYantra.com", "tastyantra@gmail.com");
 		List<VendorExtension> extensions = new ArrayList<VendorExtension>();
-		ApiInfo apiInfo = new ApiInfo("Park Here", "Boot app for Parking management", "1.0", "testyantra.com", contact,
+		ApiInfo apiInfo = new ApiInfo("Park Here", "Spring Boot app for Parking management", "1.0", "testyantra.com", contact,
 				"apache tomcat", "www.apache.com", extensions);
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("com.ty.park_here")).build();
+				.apis(RequestHandlerSelectors.basePackage("com.ty.park_here")).build().apiInfo(apiInfo);
 	}
 
 }
