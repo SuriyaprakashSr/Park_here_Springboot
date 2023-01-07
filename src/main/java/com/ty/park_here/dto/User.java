@@ -2,6 +2,8 @@ package com.ty.park_here.dto;
 
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,10 +38,13 @@ public class User {
 	@Size(min=4, max=10 ,message = "Password must be more than 4 and less them 10")
 	private String password;
 	
-	@NotBlank(message = "Phone number must be of 10 digits")
+	@NotNull(message = "Phone number can not be null")
 	private long phone;
 	
 	@NotBlank(message = "address can not be blank")
 	private String address;
+	
+	@Enumerated(EnumType.STRING)
+	private Roles roles;
 	
 }
