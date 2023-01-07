@@ -22,8 +22,8 @@ public class ParkingLocationService {
 
 	@Autowired
 	private ParkingLocationDao parkingLocationDao;
-	@Autowired
-	private ParkingSpaceDao parkingSpaceDao;
+//	@Autowired
+//	private ParkingSpaceDao parkingSpaceDao;
 
 	public static final Logger logger = Logger.getLogger(ParkingSpaceServices.class);
 	

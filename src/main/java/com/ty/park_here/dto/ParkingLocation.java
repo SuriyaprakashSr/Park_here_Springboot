@@ -24,6 +24,7 @@ public class ParkingLocation {
 	private int id;
 	@NotBlank(message = "Location can no be blank")
 	private String locationName;
+	
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<ParkingSpace> parkingSpaces;
 
