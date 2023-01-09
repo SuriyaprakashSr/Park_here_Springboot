@@ -38,7 +38,7 @@ public class ParkingLocationService {
 	}
 
 	public ResponseEntity<ResponseStructure<ParkingLocation>> updateParkingLocation(ParkingLocation parkingLocation,
-			int id) {
+			String id) {
 		ParkingLocation parkingLocation2 = parkingLocationDao.findById(id);
 		ResponseStructure<ParkingLocation> responseStructure = new ResponseStructure<ParkingLocation>();
 		if (parkingLocation2 !=null) {
@@ -55,7 +55,7 @@ public class ParkingLocationService {
 
 	}
 
-	public ResponseEntity<ResponseStructure<ParkingLocation>> findById(int id) {
+	public ResponseEntity<ResponseStructure<ParkingLocation>> findById(String id) {
 		ParkingLocation parkingLocation = parkingLocationDao.findById(id);
 		ResponseStructure<ParkingLocation> responseStructure = new ResponseStructure<ParkingLocation>();
 		if (parkingLocation != null) {
@@ -85,7 +85,7 @@ public class ParkingLocationService {
 		}
 	}
 
-	public ResponseEntity<ResponseStructure<ParkingLocation>> deleteByLocation(int id) {
+	public ResponseEntity<ResponseStructure<ParkingLocation>> deleteByLocation(String id) {
 		ParkingLocation parkingLocation = parkingLocationDao.findById(id);
 		ResponseStructure<ParkingLocation> responseStructure = new ResponseStructure<ParkingLocation>();
 		ResponseEntity<ResponseStructure<ParkingLocation>> responseEntity = new ResponseEntity<ResponseStructure<ParkingLocation>>(

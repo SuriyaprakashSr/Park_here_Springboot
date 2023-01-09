@@ -34,7 +34,7 @@ public class UserService {
 
 	}
 
-	public ResponseEntity<ResponseStructure<User>> updateUser(User user, int id) {
+	public ResponseEntity<ResponseStructure<User>> updateUser(User user, String id) {
 		Optional<User> user2 = userDao.getUserById(id);
 		ResponseStructure<User> responseStructure = new ResponseStructure<User>();
 		ResponseEntity<ResponseStructure<User>> responseEntity = new ResponseEntity<ResponseStructure<User>>(
@@ -53,7 +53,7 @@ public class UserService {
 		}
 	}
 
-	public ResponseEntity<ResponseStructure<User>> getUserById(int id) {
+	public ResponseEntity<ResponseStructure<User>> getUserById(String id) {
 		Optional<User> optianl = userDao.getUserById(id);
 		ResponseStructure<User> responseStructure = new ResponseStructure<User>();
 		ResponseEntity<ResponseStructure<User>> responseEntity = new ResponseEntity<ResponseStructure<User>>(
@@ -72,7 +72,7 @@ public class UserService {
 		}
 	}
 
-	public ResponseEntity<ResponseStructure<User>> deleteUser(int id) {
+	public ResponseEntity<ResponseStructure<User>> deleteUser(String id) {
 		Optional<User> optional = userDao.getUserById(id);
 		ResponseStructure<User> responseStructure = new ResponseStructure<User>();
 		ResponseEntity<ResponseStructure<User>> responseEntity = new ResponseEntity<ResponseStructure<User>>(
