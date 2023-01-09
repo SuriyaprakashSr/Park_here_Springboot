@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.ty.park_here.dto.ParkingLocation;
 
-public interface ParkingLocationRepository extends JpaRepository<ParkingLocation, Integer> {
+public interface ParkingLocationRepository extends JpaRepository<ParkingLocation, String> {
 
 	public ParkingLocation findByLocationName(String name);
 

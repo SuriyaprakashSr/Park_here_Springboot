@@ -34,7 +34,7 @@ public class ParkingSpaceServices {
 	
 	public static final Logger logger = Logger.getLogger(ParkingSpaceServices.class);
 
-	public ResponseEntity<ResponseStructure<ParkingSpace>> saveParkingSpace(ParkingSpace parkingSpace, int id) {
+	public ResponseEntity<ResponseStructure<ParkingSpace>> saveParkingSpace(ParkingSpace parkingSpace, String id) {
 		ParkingLocation location = parkingLocationDao.findById(id);
 		ResponseStructure<ParkingSpace> responseStructure = new ResponseStructure<>();
 		if (location != null) {
@@ -53,8 +53,8 @@ public class ParkingSpaceServices {
 			throw new NoSuchLocationFoundException("unable to save parking space because no such location found");
 		}
 	}
-	public ResponseEntity<ResponseStructure<ParkingSpace>> SendToken(ParkingSpace parkingSpace, int id,
-			int uid, int pid) {
+	public ResponseEntity<ResponseStructure<ParkingSpace>> SendToken(ParkingSpace parkingSpace, String id,
+			String uid, String pid) {
 		ParkingSpace parkingSpace1 = parkingSpaceDao.findParkingSpaceById(id);
 		ParkingLocation location = parkingLocationDao.findById(pid);
 		LocalTime time= LocalTime.now();
@@ -79,7 +79,7 @@ public class ParkingSpaceServices {
 	}
 	
 	
-	public ResponseEntity<ResponseStructure<ParkingSpace>> updateParkingSpace(ParkingSpace parkingSpace, int id) {
+	public ResponseEntity<ResponseStructure<ParkingSpace>> updateParkingSpace(ParkingSpace parkingSpace, String id) {
 		ParkingSpace parkingSpace1 = parkingSpaceDao.findParkingSpaceById(id);
 		ResponseStructure<ParkingSpace> responseStructure = new ResponseStructure<>();
 		if (parkingSpace1 != null) {
@@ -96,7 +96,7 @@ public class ParkingSpaceServices {
 		}
 	}
 
-	public ResponseEntity<ResponseStructure<ParkingSpace>> getParkingSpaceByid(int id) {
+	public ResponseEntity<ResponseStructure<ParkingSpace>> getParkingSpaceByid(String id) {
 		ParkingSpace parkingSpace = parkingSpaceDao.findParkingSpaceById(id);
 		ResponseStructure<ParkingSpace> responseStructure = new ResponseStructure<>();
 		if (parkingSpace != null) {
@@ -111,7 +111,7 @@ public class ParkingSpaceServices {
 		}
 	}
 
-	public ResponseEntity<ResponseStructure<String>> deleteParkingSpaceById(int id) {
+	public ResponseEntity<ResponseStructure<String>> deleteParkingSpaceById(String id) {
 		ParkingSpace parkingSpace = parkingSpaceDao.findParkingSpaceById(id);
 		ResponseStructure<String> responseStructure = new ResponseStructure<>();
 

@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,8 +22,10 @@ import lombok.Setter;
 public class ParkingLocation {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@GenericGenerator(name = "id_generations", strategy = "com.ty.park_here.customgeneration.CustomParkingLoacationId")
+	@GeneratedValue(generator = "id_generations")
+	private String id;
+	
 	@NotBlank(message = "Location can no be blank")
 	private String locationName;
 	

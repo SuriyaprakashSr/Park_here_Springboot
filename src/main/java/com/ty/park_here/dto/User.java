@@ -12,6 +12,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.ty.park_here.util.AesEncryption;
 
 import lombok.Data;
@@ -25,8 +27,10 @@ public class User {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@GenericGenerator(name = "id_generation", strategy = "com.ty.park_here.customgeneration.CustomUserId")
+	@GeneratedValue(generator = "id_generation")
+	private String id;
+	
 	@NotBlank(message = "Name can not be blank.. Kindly fill the valid name")
 	private String name;
 	

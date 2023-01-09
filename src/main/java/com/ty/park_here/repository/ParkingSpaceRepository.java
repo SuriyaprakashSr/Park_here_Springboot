@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.ty.park_here.dto.ParkingSpace;
 
-public interface ParkingSpaceRepository extends JpaRepository<ParkingSpace, Integer> {
+public interface ParkingSpaceRepository extends JpaRepository<ParkingSpace, String> {
 	
 
 }

@@ -24,7 +24,7 @@ public class ParkingSpaceDao {
 	}
 	
 	
-	public ParkingSpace findParkingSpaceById(int id) {
+	public ParkingSpace findParkingSpaceById(String id) {
 		Optional< ParkingSpace> optional= parkingSpaceRepository.findById(id);
 		if(optional.isPresent()) {
 			return optional.get();
@@ -32,7 +32,7 @@ public class ParkingSpaceDao {
 		return null;
 	}                          
 
-	public String deleteParkingSpace(int id) {
+	public String deleteParkingSpace(String id) {
 		parkingSpaceRepository.deleteById(id);
 		return "deleted";
 	}
