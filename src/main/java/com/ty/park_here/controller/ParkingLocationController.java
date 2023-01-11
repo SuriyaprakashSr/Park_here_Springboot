@@ -54,8 +54,8 @@ public class ParkingLocationController {
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<ParkingLocation>> updateParkingLocation(@Valid
-			@RequestBody ParkingLocation parkingLocation, @RequestParam String id) {
-		return parkingLocationService.updateParkingLocation(parkingLocation, id);
+			@RequestBody ParkingLocation parkingLocation, @RequestParam String parkingLocationId) {
+		return parkingLocationService.updateParkingLocation(parkingLocation, parkingLocationId);
 	}
 
 	@ApiOperation(value = "Find ParkingLocation", notes = "It is used to find ParkingLocation by name")
@@ -76,8 +76,8 @@ public class ParkingLocationController {
 
 
 	@DeleteMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<ParkingLocation>> deleteParkingLocation(@Valid @RequestParam String id) {
-		return parkingLocationService.deleteByLocation(id);
+	public ResponseEntity<ResponseStructure<ParkingLocation>> deleteParkingLocation(@Valid @RequestParam String parkingLocationId) {
+		return parkingLocationService.deleteByLocation(parkingLocationId);
 	}
 
 	@ApiOperation(value = "Find ParkingLocation", notes = "It is used to find ParkingLocation by id")
@@ -87,7 +87,7 @@ public class ParkingLocationController {
 
 
 	@PatchMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<ParkingLocation>> findById(@Valid @RequestParam String id) {
-		return parkingLocationService.findById(id);
+	public ResponseEntity<ResponseStructure<ParkingLocation>> findById(@Valid @RequestParam String parkingLocationId) {
+		return parkingLocationService.findById(parkingLocationId);
 	}
 }

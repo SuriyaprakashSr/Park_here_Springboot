@@ -26,8 +26,8 @@ public class ParkingLocationDao {
 		return parkingLocationRepository.findByLocationName(name);
 	}
 
-	public ParkingLocation findById(String id) {
-		Optional<ParkingLocation>optional = parkingLocationRepository.findById(id);
+	public ParkingLocation findById(String parkingLocationId) {
+		Optional<ParkingLocation>optional = parkingLocationRepository.findById(parkingLocationId);
 		if(optional.isPresent()) {
 			return optional.get();
 		}

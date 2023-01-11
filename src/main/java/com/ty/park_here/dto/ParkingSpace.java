@@ -18,7 +18,7 @@ public class ParkingSpace {
 	@Id
 	@GenericGenerator(name = "id_generate", strategy = "com.ty.park_here.customgeneration.CustomParkinSpaceId")
 	@GeneratedValue(generator = "id_generate")
-	private String id;
+	private String parkingSpaceId;
 
 	@NotNull(message = "Name can not be blank.. Kindly fill the valid name")
 	private String parkingSpaceName;
@@ -34,8 +34,6 @@ public class ParkingSpace {
 	
 	@NotNull(message = "Totel space can not be null")
 	private int rentPerHour;
-	
-	private String vehicleNo;
 	
 	
 }

@@ -38,11 +38,11 @@ public class ParkingLocationService {
 	}
 
 	public ResponseEntity<ResponseStructure<ParkingLocation>> updateParkingLocation(ParkingLocation parkingLocation,
-			String id) {
-		ParkingLocation parkingLocation2 = parkingLocationDao.findById(id);
+			String parkingLocationId) {
+		ParkingLocation parkingLocation2 = parkingLocationDao.findById(parkingLocationId);
 		ResponseStructure<ParkingLocation> responseStructure = new ResponseStructure<ParkingLocation>();
 		if (parkingLocation2 !=null) {
-			parkingLocation.setId(id);
+			parkingLocation.setParkingLocationId(parkingLocationId);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Updated ParkingLocation name");
 			responseStructure.setData(parkingLocationDao.updateParkingLocation(parkingLocation));
@@ -55,13 +55,13 @@ public class ParkingLocationService {
 
 	}
 
-	public ResponseEntity<ResponseStructure<ParkingLocation>> findById(String id) {
-		ParkingLocation parkingLocation = parkingLocationDao.findById(id);
+	public ResponseEntity<ResponseStructure<ParkingLocation>> findById(String parkingLocationId) {
+		ParkingLocation parkingLocation = parkingLocationDao.findById(parkingLocationId);
 		ResponseStructure<ParkingLocation> responseStructure = new ResponseStructure<ParkingLocation>();
 		if (parkingLocation != null) {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("LocationName found by Id");
-			responseStructure.setData(parkingLocationDao.findById(id));
+			responseStructure.setData(parkingLocationDao.findById(parkingLocationId));
 			logger.debug("Parking location found for givven id");
 			return new ResponseEntity<ResponseStructure<ParkingLocation>>(responseStructure, HttpStatus.OK);
 		}else {
@@ -85,8 +85,8 @@ public class ParkingLocationService {
 		}
 	}
 
-	public ResponseEntity<ResponseStructure<ParkingLocation>> deleteByLocation(String id) {
-		ParkingLocation parkingLocation = parkingLocationDao.findById(id);
+	public ResponseEntity<ResponseStructure<ParkingLocation>> deleteByLocation(String parkingLocationId) {
+		ParkingLocation parkingLocation = parkingLocationDao.findById(parkingLocationId);
 		ResponseStructure<ParkingLocation> responseStructure = new ResponseStructure<ParkingLocation>();
 		ResponseEntity<ResponseStructure<ParkingLocation>> responseEntity = new ResponseEntity<ResponseStructure<ParkingLocation>>(
 				responseStructure, HttpStatus.OK);
