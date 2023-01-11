@@ -8,9 +8,12 @@ import org.springframework.stereotype.Repository;
 import com.ty.park_here.dto.User;
 import com.ty.park_here.repository.UserRepository;
 
+import io.swagger.annotations.Scope;
+
 @Repository
 public class UserDao {
 
+	
 	@Autowired
 	private UserRepository repository;
 
@@ -18,8 +21,8 @@ public class UserDao {
 		return repository.save(user);
 	}
 
-	public Optional<User> getUserById(String id) {
-		return repository.findById(id);
+	public Optional<User> getUserById(String userId) {
+		return repository.findById(userId);
 	}
 
 	public User updateUser(User user) {

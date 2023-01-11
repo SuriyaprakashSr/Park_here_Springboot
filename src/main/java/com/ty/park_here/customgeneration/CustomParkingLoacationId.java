@@ -19,7 +19,7 @@ public class CustomParkingLoacationId implements IdentifierGenerator {
 		try {
 			Connection connection = session.connection();
 			Statement statement = connection.createStatement();
-			String sql = "SELECT * FROM parking_location ORDER BY id DESC LIMIT 1";
+			String sql = "SELECT * FROM parking_location ORDER BY parking_location_id DESC LIMIT 1";
 			ResultSet resultSet = statement.executeQuery(sql);
 			if (resultSet.next()) {
 				String res = resultSet.getString(1);

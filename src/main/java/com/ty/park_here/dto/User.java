@@ -16,6 +16,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.ty.park_here.util.AesEncryption;
 
+import io.swagger.annotations.Scope;
 import lombok.Data;
 
 @Data
@@ -29,7 +30,7 @@ public class User {
 	@Id
 	@GenericGenerator(name = "id_generation", strategy = "com.ty.park_here.customgeneration.CustomUserId")
 	@GeneratedValue(generator = "id_generation")
-	private String id;
+	private String userId;
 	
 	@NotBlank(message = "Name can not be blank.. Kindly fill the valid name")
 	private String name;
@@ -39,7 +40,7 @@ public class User {
 	
 	@NotNull
 	@Convert(converter = AesEncryption.class)
-	@Size(min=4, max=10 ,message = "Password must be more than 4 and less them 10")
+	@Size(min=4,message = "Password must be more than 4")
 	private String password;
 	
 	@NotNull(message = "Phone number can not be null")
@@ -50,5 +51,7 @@ public class User {
 	
 	@Enumerated(EnumType.STRING)
 	private Roles roles;
+	
+	private String vehicleNo;
 	
 }

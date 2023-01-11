@@ -24,7 +24,7 @@ public class ParkingLocation {
 	@Id
 	@GenericGenerator(name = "id_generations", strategy = "com.ty.park_here.customgeneration.CustomParkingLoacationId")
 	@GeneratedValue(generator = "id_generations")
-	private String id;
+	private String parkingLocationId;
 	
 	@NotBlank(message = "Location can no be blank")
 	private String locationName;

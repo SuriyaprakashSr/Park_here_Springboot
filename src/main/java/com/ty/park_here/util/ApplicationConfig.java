@@ -25,7 +25,7 @@ public class ApplicationConfig {
 		ApiInfo apiInfo = new ApiInfo("Park Here", "Boot app for Parking management", "1.0", "testyantra.com", contact,
 				"apache tomcat", "www.apache.com", extensions);
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("com.ty.park_here")).build();
+				.apis(RequestHandlerSelectors.basePackage("com.ty.park_here")).build().apiInfo(apiInfo);
 	}
 
 }

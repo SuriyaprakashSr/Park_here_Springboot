@@ -24,16 +24,16 @@ public class ParkingSpaceDao {
 	}
 	
 	
-	public ParkingSpace findParkingSpaceById(String id) {
-		Optional< ParkingSpace> optional= parkingSpaceRepository.findById(id);
+	public ParkingSpace findParkingSpaceById(String parkingSpaceId) {
+		Optional< ParkingSpace> optional= parkingSpaceRepository.findById(parkingSpaceId);
 		if(optional.isPresent()) {
 			return optional.get();
 		}
 		return null;
 	}                          
 
-	public String deleteParkingSpace(String id) {
-		parkingSpaceRepository.deleteById(id);
+	public String deleteParkingSpace(String parkingSpaceId) {
+		parkingSpaceRepository.deleteById(parkingSpaceId);
 		return "deleted";
 	}
 

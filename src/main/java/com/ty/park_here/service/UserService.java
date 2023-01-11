@@ -34,13 +34,13 @@ public class UserService {
 
 	}
 
-	public ResponseEntity<ResponseStructure<User>> updateUser(User user, String id) {
-		Optional<User> user2 = userDao.getUserById(id);
+	public ResponseEntity<ResponseStructure<User>> updateUser(User user, String userId) {
+		Optional<User> user2 = userDao.getUserById(userId);
 		ResponseStructure<User> responseStructure = new ResponseStructure<User>();
 		ResponseEntity<ResponseStructure<User>> responseEntity = new ResponseEntity<ResponseStructure<User>>(
 				responseStructure, HttpStatus.OK);
 		if (user2.isPresent()) {
-			user.setId(id);
+			user.setUserId(userId);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("User Updated Successfully");
 			responseStructure.setData(userDao.updateUser(user));
@@ -53,15 +53,15 @@ public class UserService {
 		}
 	}
 
-	public ResponseEntity<ResponseStructure<User>> getUserById(String id) {
-		Optional<User> optianl = userDao.getUserById(id);
+	public ResponseEntity<ResponseStructure<User>> getUserById(String userId) {
+		Optional<User> optianl = userDao.getUserById(userId);
 		ResponseStructure<User> responseStructure = new ResponseStructure<User>();
 		ResponseEntity<ResponseStructure<User>> responseEntity = new ResponseEntity<ResponseStructure<User>>(
 				responseStructure, HttpStatus.OK);
 		if (optianl.isPresent()) {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("User Found");
-			responseStructure.setData(userDao.getUserById(id).get());
+			responseStructure.setData(userDao.getUserById(userId).get());
 			logger.debug("User found");
 			return responseEntity;
 
@@ -72,8 +72,8 @@ public class UserService {
 		}
 	}
 
-	public ResponseEntity<ResponseStructure<User>> deleteUser(String id) {
-		Optional<User> optional = userDao.getUserById(id);
+	public ResponseEntity<ResponseStructure<User>> deleteUser(String userId) {
+		Optional<User> optional = userDao.getUserById(userId);
 		ResponseStructure<User> responseStructure = new ResponseStructure<User>();
 		ResponseEntity<ResponseStructure<User>> responseEntity = new ResponseEntity<ResponseStructure<User>>(
 				responseStructure, HttpStatus.OK);
